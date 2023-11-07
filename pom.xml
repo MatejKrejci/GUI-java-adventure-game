@@ -6,7 +6,7 @@
 
     <groupId>cz.vse</groupId>
     <artifactId>Adventura-Krem22</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0-snapshot</version>
     <name>Adventura</name>
 
     <properties>

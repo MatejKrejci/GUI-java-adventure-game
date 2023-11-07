@@ -1,4 +1,12 @@
 package cz.vse.adventurakrem22.game;
+
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.PredmetPozorovani;
+import javafx.collections.FXCollections;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Třída představující mapu lokací herního světa. V datovém atributu
  * {@link #currentArea} uchovává odkaz na aktuální lokaci, ve které
@@ -12,7 +20,7 @@ package cz.vse.adventurakrem22.game;
  * @author Jan Říha
  * @version LS-2023, 2023-25-06
  */
-public class GameWorld {
+public class GameWorld implements PredmetPozorovani {
     private Area cela;
     private Area chodba;
     private Area straznice;
@@ -24,6 +32,8 @@ public class GameWorld {
     private Area currentArea;
     private Area unikoveOkno;
     private Backpack backpack;
+    private Set<Pozorovatel> seznamPozorovatelu = new HashSet<>();
+
     /**
      * Konstruktor třídy, vytvoří jednotlivé lokace a propojí je pomocí východů. Vytváří také předměty a postavy a přidává je do jednotlivých lokací.
      * 
@@ -122,8 +132,11 @@ public class GameWorld {
      * @param currentArea lokace, která bude nastavena jako aktuální
      */
     public void setCurrentArea(Area currentArea) {
+
         this.currentArea = currentArea;
+        upozorniPozorovatele();
     }
+
 
     /**
      * Metoda vrací danou lokace podle zadaného jména.
@@ -175,4 +188,13 @@ public class GameWorld {
         return GameState.PLAYING;
     }
 
+    @Override
+    public void registruj(Pozorovatel pozorovatel) {
+        seznamPozorovatelu.add(pozorovatel);
+    }
+    private void upozorniPozorovatele() {
+        for (Pozorovatel pozorovatel : seznamPozorovatelu){
+            pozorovatel.aktualizuj();
+        }
+    }
 }

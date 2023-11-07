@@ -161,7 +161,12 @@ public class Area implements Comparable<Area> {
         }
         return null;
     }
-    
+
+    public Collection<Area> getAllExits() {
+        return exits;
+    }
+
+
     /**
      * Metoda vrací novou kolekci pouze s názvy předmětů v dané lokaci.
      * 
@@ -260,7 +265,7 @@ public class Area implements Comparable<Area> {
     }
         /**
      * Metoda porovnává dvě lokace <i>(objekty)</i>. Lokace jsou shodné,
-     * pokud mají stejný název <i>(atribut {@link #nazev})</i>. Tato metoda
+     * pokud mají stejný název <i>(atribut {@link})</i>. Tato metoda
      * je důležitá pro správné fungování množiny východů do sousedních
      * lokací.
      * <p>
@@ -295,6 +300,11 @@ public class Area implements Comparable<Area> {
     public int compareTo(Area area)
     {
         return name.compareTo(area.getName());
+    }
+
+    @Override
+    public String toString() {
+        return getNameTwo();
     }
 }
 
