@@ -1,4 +1,8 @@
 package cz.vse.adventurakrem22.game;
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.PredmetPozorovani;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 import java.util.*;
 
 /**
@@ -12,11 +16,12 @@ import java.util.*;
  * @author Jan Říha
  * @version LS-2023, 2023-05-07
  */
-public class Game {
+public class Game implements PredmetPozorovani {
     private boolean gameOver;
     private GameWorld world;
     private Set<IAction> actions;
     private Backpack backpack;
+    private Map<ZmenaHry, Set<Pozorovatel>> seznamPozorovatelu = new HashMap<>();
 
     /**
      * Konstruktor třídy Game. Vytvoří hru a seznam platných příkazů.
@@ -40,6 +45,9 @@ public class Game {
         actions.add(new ActionShowBag(backpack));
         actions.add(new ActionLocationInfo(this));
         actions.add(new ActionUnlock(this, backpack));
+        for (ZmenaHry zmenaHry : ZmenaHry.values()){
+            seznamPozorovatelu.put(zmenaHry, new HashSet<>());
+        }
     }
 
     /**
@@ -59,6 +67,7 @@ public class Game {
      */
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+        upozorniPozorovatele(ZmenaHry.KONEC_HRY);
     }
 
     /**
@@ -158,5 +167,14 @@ public class Game {
         }
         return epilogue;
     }
-    
+
+    @Override
+    public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
+        seznamPozorovatelu.get(zmenaHry).add(pozorovatel);
+    }
+    private void upozorniPozorovatele(ZmenaHry zmenaHry) {
+        for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)){
+            pozorovatel.aktualizuj();
+        }
+    }
 }

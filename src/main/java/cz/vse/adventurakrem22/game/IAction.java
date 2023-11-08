@@ -1,6 +1,8 @@
 
 package cz.vse.adventurakrem22.game;
 
+import cz.vse.adventurakrem22.start.PredmetPozorovani;
+
 /**
  * Rozhraní definující metody nutné pro implementaci herního příkazu. Pro každý
  * příkaz, který je možné ve hře použít, existuje třída zajišťující jeho obsluhu.
@@ -10,7 +12,7 @@ package cz.vse.adventurakrem22.game;
  * @autho Matěj Krejčí
  * @version LS-2023, 2023-25-06
  */
-public interface IAction {
+public interface IAction  {
 
     /**
      * Metoda vrací název herního příkazu. Jedná se o jedno slovo, které hráč

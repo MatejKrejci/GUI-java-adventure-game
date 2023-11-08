@@ -25,7 +25,7 @@ public class ActionMove implements IAction {
      * @return název možných variant příkazů
      */
     public String getName() {
-        return "jdi/bez/go/run/jdu/bezim/bezet";
+        return "jdi/bez/go/run/jdu/bezim/bezet/sprintuj";
     }
 
     /**

@@ -2,9 +2,12 @@ package cz.vse.adventurakrem22.game;
 
 import cz.vse.adventurakrem22.start.Pozorovatel;
 import cz.vse.adventurakrem22.start.PredmetPozorovani;
+import cz.vse.adventurakrem22.start.ZmenaHry;
 import javafx.collections.FXCollections;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -32,7 +35,7 @@ public class GameWorld implements PredmetPozorovani {
     private Area currentArea;
     private Area unikoveOkno;
     private Backpack backpack;
-    private Set<Pozorovatel> seznamPozorovatelu = new HashSet<>();
+    private Map<ZmenaHry,Set<Pozorovatel>> seznamPozorovatelu = new HashMap<>();
 
     /**
      * Konstruktor třídy, vytvoří jednotlivé lokace a propojí je pomocí východů. Vytváří také předměty a postavy a přidává je do jednotlivých lokací.
@@ -113,6 +116,10 @@ public class GameWorld implements PredmetPozorovani {
         kantyna.addNpc(spoluvezen);
 
         cela.addNpc(escobar);
+
+        for (ZmenaHry zmenaHry : ZmenaHry.values()) {
+            seznamPozorovatelu.put(zmenaHry, new HashSet<>());
+        }
     }
 
     /**
@@ -134,7 +141,7 @@ public class GameWorld implements PredmetPozorovani {
     public void setCurrentArea(Area currentArea) {
 
         this.currentArea = currentArea;
-        upozorniPozorovatele();
+        upozorniPozorovatele(ZmenaHry.ZMENA_MISTNOSTI);
     }
 
 
@@ -189,11 +196,11 @@ public class GameWorld implements PredmetPozorovani {
     }
 
     @Override
-    public void registruj(Pozorovatel pozorovatel) {
-        seznamPozorovatelu.add(pozorovatel);
+    public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
+        seznamPozorovatelu.get(zmenaHry).add(pozorovatel);
     }
-    private void upozorniPozorovatele() {
-        for (Pozorovatel pozorovatel : seznamPozorovatelu){
+    private void upozorniPozorovatele(ZmenaHry zmenaHry) {
+        for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)){
             pozorovatel.aktualizuj();
         }
     }
