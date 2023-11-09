@@ -129,4 +129,20 @@ public class HomeController {
         napovedaStage.show();
         wv.getEngine().load(getClass().getResource("napoveda.html").toExternalForm());
     }
+
+    public void restartHryKlik(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Jsi si jistý, že chceš restartovat hru?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            hra.setGameOver(false);
+            hra = new Game();
+            seznamVychodu.clear();
+            vystup.clear();
+            vstup.clear();
+
+            initialize();
+        }
+    }
+
 }
