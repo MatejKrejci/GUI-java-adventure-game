@@ -13,13 +13,19 @@ public class ListCellProstor extends ListCell<Area> {
             setGraphic(null);
         }else {
         setText(prostor.getName());
+
         String cesta = getClass().getResource("prostory/" + prostor.getName() + ".jpg").toExternalForm();
-        ImageView iw = new ImageView(cesta);
+        /**if (cesta == null){
+            System.out.println("Chyba");
+        }else{*/
+            ImageView iw = new ImageView(cesta);
 
             iw.setFitWidth(100);
             iw.setPreserveRatio(true);
             setGraphic(iw);
 
+
         }
     }
 }
+
