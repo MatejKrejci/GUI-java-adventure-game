@@ -302,9 +302,9 @@ public class Area implements Comparable<Area> {
         return name.compareTo(area.getName());
     }
 
-    @Override
+    /**@Override
     public String toString() {
         return getNameTwo();
-    }
+    }*/
 }
 

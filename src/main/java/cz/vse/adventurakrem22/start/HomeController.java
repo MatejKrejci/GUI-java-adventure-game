@@ -6,12 +6,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class HomeController {
+    @FXML
+    private ImageView hrac;
     @FXML
     private ListView<Area> panelVychodu;
     @FXML
@@ -26,28 +33,46 @@ public class HomeController {
 
     private ObservableList<Area> seznamVychodu = FXCollections.observableArrayList();
 
+    private Map<String, Point2D> souradniceProstoru = new HashMap<>();
+
     @FXML
     private void initialize(){
         vystup.appendText(hra.getPrologue() + "\n\n");
         Platform.runLater(() -> vstup.requestFocus());
         panelVychodu.setItems(seznamVychodu);
-
-        /**Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                vstup.requestFocus();
-            }
-        }*/
-
-        hra.getWorld().registruj(ZmenaHry.ZMENA_MISTNOSTI, () -> aktualizujSeznamVychodu());
+        hra.getWorld().registruj(ZmenaHry.ZMENA_MISTNOSTI, () -> {
+            aktualizujSeznamVychodu();
+            aktualizujPolohuHrace();
+        });
         hra.registruj(ZmenaHry.KONEC_HRY,() -> aktualizujKonecHry());
         aktualizujSeznamVychodu();
+        vlozSouradnice();
+        panelVychodu.setCellFactory(param -> new ListCellProstor());
+    }
+
+    private void vlozSouradnice() {
+        souradniceProstoru.put("cela", new Point2D(28,26));
+        souradniceProstoru.put("chodba",new Point2D(86,24));
+        souradniceProstoru.put("kantyna",new Point2D(143,100));
+        souradniceProstoru.put("sprchy",new Point2D(139,186));
+        souradniceProstoru.put("straznice",new Point2D(188,24));
+        souradniceProstoru.put("vezenska_zahrada",new Point2D(14,115));
+        souradniceProstoru.put("vezenska_vez",new Point2D(219,85));
+        souradniceProstoru.put("skrys",new Point2D(27,77));
+        souradniceProstoru.put("unikove_okno", new Point2D(28,186));
     }
 
     @FXML
     private void aktualizujSeznamVychodu() {
         seznamVychodu.clear();
         seznamVychodu.addAll(hra.getWorld().getCurrentArea().getAllExits());
+    }
+
+    private void aktualizujPolohuHrace() {
+        String prostor = hra.getWorld().getCurrentArea().getName();
+        hrac.setLayoutX(souradniceProstoru.get(prostor).getX());
+        hrac.setLayoutY(souradniceProstoru.get(prostor).getY());
+
     }
 
     @FXML
@@ -89,7 +114,7 @@ public class HomeController {
     private void klikPanelVychodu(MouseEvent mouseEvent) {
         Area cil = panelVychodu.getSelectionModel().getSelectedItem();
         if (cil == null) return;
-        String prikaz = "jdi " + cil;
+        String prikaz = "jdi " + cil.getNameTwo();
         zpracujPrikaz(prikaz);
     }
 }
