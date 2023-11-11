@@ -1,4 +1,8 @@
 package cz.vse.adventurakrem22.game;
+
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 /**
  * Třída představuje příkaz pomoc.
  * Příkaz pomoc vypíše příručku jak hrát hru (tzn. info o hře, všechny možné příkazy).
@@ -45,4 +49,5 @@ public class ActionHelp implements IAction {
         + "\n-MLUV (escobar) - Popovídáš si s osobou, ale musí být ve stejné lokaci jako ty.";
 
     }
+
 }

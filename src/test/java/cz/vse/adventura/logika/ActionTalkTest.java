@@ -1,9 +1,6 @@
 package cz.vse.adventura.logika;
 
-import cz.vse.adventurakrem22.game.ActionTalk;
-import cz.vse.adventurakrem22.game.Area;
-import cz.vse.adventurakrem22.game.Game;
-import cz.vse.adventurakrem22.game.Npc;
+import cz.vse.adventurakrem22.game.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +11,7 @@ public class ActionTalkTest {
 
     @BeforeEach
     public void setUp() {
-        game = new Game();
+        game = new Game(new Backpack(3));
         actionTalk = new ActionTalk(game);
     }
 

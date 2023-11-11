@@ -1,4 +1,8 @@
 package cz.vse.adventurakrem22.game;
+
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 /**
  * Třída implementující příkaz mluv pro mluvení s postavami.
  * Příkaz mluv vypíše, co říka postava, pokud na ni promluvíte.
@@ -74,5 +78,6 @@ public class ActionTalk implements IAction {
             return "Tato postava se v této oblasti nenachází.";
         }
     }
-    
+
+
 }

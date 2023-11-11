@@ -1,4 +1,8 @@
 package cz.vse.adventurakrem22.game;
+
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 /**
  * Třída představuje příkaz lokace.
  * Příkaz lokace vypíše informace o aktuální lokaci.
@@ -42,5 +46,6 @@ public class ActionLocationInfo implements IAction {
         Area currentArea = game.getWorld().getCurrentArea();
         return currentArea.getDescription();
     }
+
 
 }

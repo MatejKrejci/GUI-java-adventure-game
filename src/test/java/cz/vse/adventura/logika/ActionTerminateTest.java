@@ -1,6 +1,7 @@
 package cz.vse.adventura.logika;
 
 import cz.vse.adventurakrem22.game.ActionTerminate;
+import cz.vse.adventurakrem22.game.Backpack;
 import cz.vse.adventurakrem22.game.Game;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ public class ActionTerminateTest {
 
     @BeforeEach
     public void setup() {
-        game = new Game();
+        game = new Game(new Backpack(3));
         action = new ActionTerminate(game);
     }
 

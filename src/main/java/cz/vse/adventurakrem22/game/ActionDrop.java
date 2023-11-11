@@ -1,4 +1,8 @@
 package cz.vse.adventurakrem22.game;
+
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 /**
  * Třída implementující příkaz pro pokládání předmětů.
  * 
@@ -56,6 +60,7 @@ public class ActionDrop implements IAction {
 
         return "Vyhodil jsem predmet '" + parametrName + "' do aktualni lokace.";
     }
+
 
 }
 

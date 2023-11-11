@@ -20,12 +20,12 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.adventurakrem22.start.HomeController">
   <columnConstraints>
-    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" prefWidth="1000.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints valignment="CENTER" vgrow="NEVER" />
       <RowConstraints minHeight="10.0" vgrow="NEVER" />
-    <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints prefHeight="500.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
   </rowConstraints>
    <children>
@@ -35,7 +35,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#ukoncitHru" text="Ukončit" />
                 <MenuItem onAction="#napovedaKlik" text="Nápověda" />
-                <MenuItem onAction="#restartHryKlik" text="Restart"></MenuItem>
+                <MenuItem onAction="#restartHryKlik" text="Restart" />
             </items>
           </Menu>
         </menus>
@@ -58,7 +58,12 @@
       </HBox>
       <SplitPane dividerPositions="0.3" GridPane.rowIndex="2">
          <items>
-            <ListView fx:id="panelVychodu" onMouseClicked="#klikPanelVychodu" />
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+              <items>
+                  <ListView fx:id="panelVychodu" onMouseClicked="#klikPanelVychodu" />
+                  <ListView fx:id="panelInventáře" onMouseClicked="#klikInventar" />
+              </items>
+            </SplitPane>
             <TextArea fx:id="vystup" editable="false" prefHeight="316.0" prefWidth="415.0" />
          </items>
       </SplitPane>
@@ -68,7 +73,7 @@
                <children>
                   <Pane>
                      <children>
-                        <ImageView fitHeight="245.0" fitWidth="466.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="245.0" fitWidth="308.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@herniPlan.png" />
                            </image>

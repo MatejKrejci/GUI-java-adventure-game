@@ -1,9 +1,6 @@
 package cz.vse.adventura.logika;
 
-import cz.vse.adventurakrem22.game.ActionMove;
-import cz.vse.adventurakrem22.game.Area;
-import cz.vse.adventurakrem22.game.Game;
-import cz.vse.adventurakrem22.game.GameWorld;
+import cz.vse.adventurakrem22.game.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +12,7 @@ public class ActionMoveTest {
 
     @BeforeEach
     public void setUp() {
-        game = new Game();
+        game = new Game(new Backpack(3));
         actionMove = new ActionMove(game);
     }
 

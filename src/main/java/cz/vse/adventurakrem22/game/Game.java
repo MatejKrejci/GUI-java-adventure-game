@@ -28,10 +28,10 @@ public class Game implements PredmetPozorovani {
      * Hra po vytvoření již běží a je připravená zpracovávat herní příkazy.
      * 
      */
-    public Game() {
+    public Game(Backpack backpack) {
         gameOver = false;
         actions = new HashSet<>();
-        backpack = new Backpack(3);
+        this.backpack = backpack;
         world = new GameWorld(backpack);
         actions.add(new ActionHelp());
         actions.add(new ActionHelpTwo());
@@ -159,11 +159,11 @@ public class Game implements PredmetPozorovani {
         String epilogue = "Díky, že sis zahrál(a) hru.\nDoufám, že si ještě někdy zahraješ, strávil jsem u toho hodně času. :)";
         GameState gameState = world.getGameState();
         if (gameState == GameState.WON) {
-            epilogue = "\n\nVyhral(a) jsi.\nSlanil ses únikovým oknem dolů na zem a konečně ses dostal z téhle díry na svobodu." + "\nGratuluju k vítězství!\n\n" + epilogue;
+            epilogue = "\n\nVyhral(a) jsi.\nSlanil ses únikovým oknem dolů na zem a konečně ses dostal z téhle díry na svobodu." + "\nGratuluju k vítězství!\n\n" + epilogue + "\n";
         }else if (gameState == GameState.LOST && backpack.containsItem("mydlo")) {
             epilogue = "\n\nProhral(a) jsi. \nSebral jsi mydlo ze země ve věznici, neznáš to pravidlo? Ve věznici mýdlo ze země neber.\n" + "Takže dneska asi neutečeš.\n\n" + epilogue;
         }else if (gameState == GameState.LOST && !backpack.containsItem("lano")) {
-            epilogue = "\n\nProhral(a) jsi.\nVyskočil jsi únikovým oknem bez lana, takže jsi dopadl z 30 metrové výšky na zem a umřel.\n\n" + epilogue;
+            epilogue = "\n\nProhral(a) jsi.\nVyskočil jsi únikovým oknem bez lana, takže jsi dopadl z 30 metrové výšky na zem a umřel.\n\n" + epilogue + "\n";
         }
         return epilogue;
     }

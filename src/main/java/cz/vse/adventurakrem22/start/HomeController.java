@@ -1,5 +1,6 @@
 package cz.vse.adventurakrem22.start;
 
+import cz.vse.adventurakrem22.start.Pozorovatel;
 import cz.vse.adventurakrem22.game.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -19,7 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class HomeController {
+public class HomeController implements Pozorovatel {
+    @FXML
+    private ListView<Item> panelInventáře;
     @FXML
     private ImageView hrac;
     @FXML
@@ -32,7 +35,11 @@ public class HomeController {
     @FXML
     private TextField vstup;
 
-    private Game hra = new Game();
+    private Game hra = new Game(new Backpack(3));
+
+    //private Backpack backpack = new Backpack(3);
+
+    private ObservableList<Item> inventar = FXCollections.observableArrayList();
 
     private ObservableList<Area> seznamVychodu = FXCollections.observableArrayList();
 
@@ -42,11 +49,18 @@ public class HomeController {
     private void initialize(){
         vystup.appendText(hra.getPrologue() + "\n\n");
         Platform.runLater(() -> vstup.requestFocus());
+
         panelVychodu.setItems(seznamVychodu);
+        panelInventáře.setItems(inventar);
+
         hra.getWorld().registruj(ZmenaHry.ZMENA_MISTNOSTI, () -> {
             aktualizujSeznamVychodu();
             aktualizujPolohuHrace();
+            aktualizujInventar();
         });
+        hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_INVENTARE, this);
+        panelInventáře.setCellFactory(param -> new ListCellItem());
+
         hra.registruj(ZmenaHry.KONEC_HRY,() -> aktualizujKonecHry());
         aktualizujSeznamVychodu();
         vlozSouradnice();
@@ -70,6 +84,15 @@ public class HomeController {
         seznamVychodu.clear();
         seznamVychodu.addAll(hra.getWorld().getCurrentArea().getAllExits());
     }
+    @FXML
+    public void aktualizujInventar() {
+        inventar = FXCollections.observableArrayList(hra.getWorld().getBackpack().getInventory());
+        panelInventáře.getItems().clear();
+        for (Item item : inventar){
+            panelInventáře.getItems().add(item);
+        }
+    }
+
 
     private void aktualizujPolohuHrace() {
         String prostor = hra.getWorld().getCurrentArea().getName();
@@ -108,9 +131,10 @@ public class HomeController {
         if (hra.isGameOver()){
             vystup.appendText(hra.getEpilogue());
         }
-            vstup.setDisable(hra.isGameOver());
-            tlacitkoOdesli.setDisable(hra.isGameOver());
-            panelVychodu.setDisable(hra.isGameOver());
+        vstup.setDisable(hra.isGameOver());
+        tlacitkoOdesli.setDisable(hra.isGameOver());
+        panelVychodu.setDisable(hra.isGameOver());
+        panelInventáře.setDisable(hra.isGameOver());
         }
 
     @FXML
@@ -136,13 +160,26 @@ public class HomeController {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             hra.setGameOver(false);
-            hra = new Game();
+            hra = new Game(new Backpack(3));
             seznamVychodu.clear();
             vystup.clear();
             vstup.clear();
+            inventar.clear();
 
             initialize();
         }
     }
 
+    @Override
+    public void aktualizuj() {
+            aktualizujInventar();
+    }
+
+    @FXML
+    private void klikInventar(MouseEvent mouseEvent) {
+        Item cilovyItem = panelInventáře.getSelectionModel().getSelectedItem();
+        if (cilovyItem == null) return;
+        String prikaz = "poloz " + cilovyItem;
+        zpracujPrikaz(prikaz);
+    }
 }

@@ -12,7 +12,7 @@ public class ActionUnlockTest {
 
     @BeforeEach
     public void setUp() {
-        game = new Game();
+        game = new Game(new Backpack(3));
         backpack = new Backpack(3);
         actionUnlock = new ActionUnlock(game, backpack);
     }

@@ -12,7 +12,7 @@ public class ActionDropTest {
 
     @BeforeEach
     public void setUp() {
-        game = new Game();
+        game = new Game(new Backpack(3));
         backpack = new Backpack(5);
         actionDrop = new ActionDrop(game, backpack);
     }

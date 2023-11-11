@@ -54,7 +54,7 @@ public class GameWorld implements PredmetPozorovani {
         vez = new Area("vezenska_vez", "-Tak odtud na nás viděj všude. Tudy asi neuteču.","Vězeňská věž");
         skrys = new Area("skrys", "-Jak jsem o téhle skrýši doteď nevěděl, když je pod mojí postelí."+"\n" +"-To vypadá, že tím oknem bych mohl zdrhnout."
             + "\n-Ale jestli u sebe namám lano, tak to z té výšky nepřežiju.","Skrýš",true);
-        unikoveOkno = new Area("unikove_okno", "-Jestli mam u sebe lano,tak se muzu slanit dolů.\n-Jestli u sebe nemám lano, tak umřu.", "Únikové okno");
+        unikoveOkno = new Area("unikove_okno", "", "Únikové okno");
 
         cela.addExit(chodba);
         skrys.addExit(unikoveOkno);
@@ -195,6 +195,9 @@ public class GameWorld implements PredmetPozorovani {
         return GameState.PLAYING;
     }
 
+    public Backpack getBackpack(){
+        return backpack;
+    }
     @Override
     public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
         seznamPozorovatelu.get(zmenaHry).add(pozorovatel);

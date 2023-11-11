@@ -1,4 +1,8 @@
 package cz.vse.adventurakrem22.game;
+
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 /**
  * Třída implementující příkaz pro odemykání truhly.
  * 
@@ -64,5 +68,6 @@ public class ActionUnlock implements IAction {
         }
         return "Předmět '" + parametrName + "' není v této místnosti.";
     }
+
 
 }

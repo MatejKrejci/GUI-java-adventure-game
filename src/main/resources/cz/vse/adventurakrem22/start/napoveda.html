@@ -2,9 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nápověda</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uživatelská příručka – Útěk z vězení</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+    </style>
 </head>
 <body>
-Nápověda
+
+<h1>Uživatelská příručka – Útěk z vězení</h1>
+<h2>4IT101 – Semestrální práce (Adventura)</h2>
+
+<h3>1. Útěk z vězení</h3>
+
+<h4>1.1 Úvod do hry:</h4>
+<p>Hra ‚Útěk z vězení!‘ se odehrává v nechvalně známé věznici Alcatraz (slouží jako vojenská věznice pro nebezpečné vězně s maximální ostrahou). Jsi Don Juan a už jsi tady několik let a přestal si to už raději počítat. Tvůj trest byl na doživotí za zabití 2 mužů v sebeobraně.</p>
+<p>Každý den tady někoho pobodají nebo alespoň zbijou. Ty se snažíš problémům vyhýbat, jak to jen jde, ale stejně se to občas pos**e a dostaneš do držky. Už to tady nesneseš ani jeden další den. Proto jsi začal přemýšlet o tom, že bys utekl, ale zatím nebyl ten správný den. Ale až ten den přijde, tak budeš připravený. A od toho jsi tady ty (jako Don Juan) musíš utéct z věznice. Nebude to lehký úkol, ale věřím, že ty to zvládneš.</p>
+
+<h4>1.2 Info o hře jako takové</h4>
+<p>Hra celkem trvá: 5–15 minut podle toho, jak se budeš zdržovat. Jsou zde 3 způsoby, jak dohrát hru (1 vítězství, 2 prohry), tak si dávej bacha na to, co bereš, abys to neprohrál.</p>
+
+<h4>1.3 Cíl hry:</h4>
+<p>Cílem hry je dostat se z vězení. Při útěku se ale může něco přihodit a zmařit tvoje plány na útěk. Cílem hry je taky, abys si hru užil a důkladně si ji prošel a vše prozkoumal.</p>
+
+<h4>1.4 Herní pomůcky:</h4>
+<p>Ve věznici můžeš nalézt předměty a postavy, které ti mohou pomoci s útěkem. Dále také procházíš skrz lokace a můžeš se pohybovat v prostoru.</p>
+
+<h4>1.5 Příručka příkazů (HELP):</h4>
+<p>Je zde celkem 11 příkazů (nemusíš řešit diakritiku a ani velká/malá písmena. To znamená, že můžeš napsat jdi/JDI/JdÍ/gO/bEz/BEZ/běž atd...(plać to u všech příkazů i objektů), ale bacha nemůžeš skloňovat názvy objektů.</p>
+<ul>
+    <li><code>KONEC</code> - Tímhle vypneš hru kdykoliv. Tak doufám, že to dohraješ poctivě.</li>
+    <li><code>HELP2</code> - Vypíše krátký návod, jak dohrát hru.</li>
+    <li><code>JDI (někam)</code> - Tímto příkazem chodíš skrz lokace. Teď můžeš napsat 'JDI chodba' a vždy, když někam vejdeš, se vypíšou další exity, kam můžeš jít.</li>
+    <li><code>LOKACE</code> - Napíše info o lokaci. To stejné jako když přijdeš do lokace (popis lokace, možné východy).</li>
+    <li><code>ROZHLEDNI_SE</code> - Vypíše všechny předměty a postavy v dané lokaci, u commandů seber/polož/mluv musíš používat ten název, co ti tenhle příkaz vypíše.</li>
+    <li><code>PROZKOUMEJ (něco)</code> - Vypíše bližší info o postavě nebo předmětu. Vždy to píšeš jako 'PROZKOUMEJ truhla'.</li>
+    <li><code>BAG</code> - Vypíše všechny předměty, co máš v batohu.</li>
+    <li><code>SEBER (něco)</code> - Sebereš předmět ze země, ale musí být ve stejné lokaci jako ty. Vždy to píšeš jako 'SEBER klíč'.</li>
+    <li><code>POLOZ (něco)</code> - Předmět uvolní místo v batohu a objeví se v dané lokaci, kde ho položíš, takže neboj, nezmizí.</li>
+    <li><code>ODEMKNI (něco)</code> - Jestli máš potřebný předmět (např. páčidlo/klíč) v batohu, tak můžeš odemknout něco (např. dveře/truhla). Vždy to píšeš jako ODEMKNI truhla.</li>
+    <li><code>MLUV (escobar)</code> - Popovídáš si s osobou, ale musí být ve stejné lokaci jako ty.</li>
+</ul>
+
+<h4>1.6 Ukázka hraní hry:</h4>
+<ol>
+    <li>Na začátku se objevíš ve své cele, takže první, co uděláš je, že použiješ příkaz <code>ROZHLEDNI_SE</code>, tenhle příkaz ti vypíše, co za předměty a postavy jsou v cele.</li>
+    <li>Poté můžeš použít příkaz <code>PROZKOUMEJ postel</code>, <code>SEBER postel</code>, <code>PROZKOUMEJ Escobar</code>, <code>MLUV Escobar</code>, <code>PROZKOUMEJ stul</code>, <code>SEBER stul</code>.</li>
+    <li>Poté, co jsi v cele všechno prozkoumal/promluvil/sebral, můžeš se posunout dál příkazem <code>JDI chodba</code>.</li>
+</ol>
+<h3>2. Grafické rozhraní hry</h3>
+
+<h4>2.1 Mapa s pohyblivou postavou</h4>
+
+<p>Nyní při hrání hry vidíš mapu a postavu. Postava se pohybuje podle toho, jak procházíš lokacemi.</p>
+
+<h4>2.2 Interaktivní prostory</h4>
+
+<p>Pro hraní hry nyní můžeš využívat obrázky prostorů. Kliknutím na daný prostor se přesuneš do dané lokace.
+    <code>Využití příkazu jdi (tam).</code> </p>
+
+<h4>2.3 Interaktivní inventář</h4>
+
+<p>Pro hraní hry nyní můžeš využívat obrázky inventáře. Kliknutím na předmět, vyhodíš daný předmět na zem.
+    <code>Využití příkazu polož (to).</code>
+<br> <br> <br> <br> <br> </p>
+
+
+
+<p>Autor: Matěj Krejčí <br>
+    Logika hry: J. Říha (učitel) <br>
+    Grafické rozhraní hry: F. Vencovský (učitel)</p>
+
+
+
+
 </body>
 </html>

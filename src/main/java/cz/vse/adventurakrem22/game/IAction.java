@@ -1,7 +1,9 @@
 
 package cz.vse.adventurakrem22.game;
 
+import cz.vse.adventurakrem22.start.Pozorovatel;
 import cz.vse.adventurakrem22.start.PredmetPozorovani;
+import cz.vse.adventurakrem22.start.ZmenaHry;
 
 /**
  * Rozhraní definující metody nutné pro implementaci herního příkazu. Pro každý
@@ -37,5 +39,5 @@ public interface IAction  {
      * @return výsledek zpracování <i>(informace pro hráče, které se vypíšou na konzoli)</i>
      */
     public String execute(String[] parameters);
-
 }
+

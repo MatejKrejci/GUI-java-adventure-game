@@ -1,6 +1,7 @@
 package cz.vse.adventura.logika;
 
 import cz.vse.adventurakrem22.game.ActionLocationInfo;
+import cz.vse.adventurakrem22.game.Backpack;
 import cz.vse.adventurakrem22.game.Game;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ public class ActionLocationInfoTest {
 
     @BeforeEach
     public void setUp() {
-        game = new Game();
+        game = new Game(new Backpack(3));
         action = new ActionLocationInfo(game);
     }
 

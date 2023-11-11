@@ -6,7 +6,7 @@
 
     <groupId>cz.vse</groupId>
     <artifactId>Adventura-Krem22</artifactId>
-    <version>1.1.0-snapshot</version>
+    <version>1.1.0</version>
     <name>Adventura</name>
 
     <properties>
@@ -15,7 +15,7 @@
     </properties>
 
     <dependencies>
-
+        <!--
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -31,7 +31,7 @@
             <artifactId>javafx-web</artifactId>
             <version>17.0.1</version>
         </dependency>
-
+        -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

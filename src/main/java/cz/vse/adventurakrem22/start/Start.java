@@ -1,4 +1,5 @@
 package cz.vse.adventurakrem22.start;
+import cz.vse.adventurakrem22.game.Backpack;
 import cz.vse.adventurakrem22.game.Game;
 import cz.vse.adventurakrem22.ui.TextUI;
 import javafx.application.Application;
@@ -27,7 +28,7 @@ public class Start extends Application {
     public static void main(String[] args) {
         if (args.length > 0 && args[0].equals("text")){
             System.out.print("\n> ");
-            Game game = new Game();
+            Game game = new Game(new Backpack(3));
             TextUI ui = new TextUI(game);
 
             ui.play();

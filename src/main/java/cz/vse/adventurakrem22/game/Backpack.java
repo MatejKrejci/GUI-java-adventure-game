@@ -1,8 +1,12 @@
 package cz.vse.adventurakrem22.game;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.LinkedHashMap;
-/** 
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.PredmetPozorovani;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+import javafx.collections.ObservableList;
+
+import java.util.*;
+
+/**
  * Třída představuje batoh ve scenáři hry. Ve hře jen jeden batoh a má určenou kapacitu.
  * V batohu se eviduje inventář, tzn. seberu nějaký předmět a přidá se do inventáře, opačne to funguje s polozenim predmetu.
  * Inventář je uložený v kolekci.
@@ -11,10 +15,12 @@ import java.util.LinkedHashMap;
  * @author Matěj Krejčí
  * @version LS-2023, 2023-25-06
  */
-public class Backpack {
+public class Backpack implements PredmetPozorovani {
     private Map<String, Item> inventory;
     private int capacity;
-    
+    private Collection<Item> inventoryItems = new HashSet<>();
+    private Map<ZmenaHry,Set<Pozorovatel>> seznamPozorovatelu = new HashMap();
+
     /**
      * Konstruktor třídy batoh, vytvoří batoh se zadanou kapacitou a inventář.
      * 
@@ -23,6 +29,9 @@ public class Backpack {
     public Backpack(int capacity) {
         this.capacity = capacity;
         this.inventory = new LinkedHashMap<>();
+        for (ZmenaHry zmenaHry : ZmenaHry.values()) {
+            seznamPozorovatelu.put(zmenaHry, new HashSet<>());
+        }
     }
     
     /**
@@ -41,6 +50,7 @@ public class Backpack {
      * @return {@code true} batoh obsahuje předmět; {@code false} batoh neobsahuje předmět
      */
     public boolean containsItem(String itemName) {
+
         return inventory.containsKey(itemName);
     }
     
@@ -55,19 +65,26 @@ public class Backpack {
     public boolean addItem(Item item) {
         if (!isFull() && !containsItem(item.getName())){
             inventory.put(item.getName(), item);
+            upozorniPozorovatele(ZmenaHry.ZMENA_INVENTARE);
             return true;
         }
         return false;
     }
-    
+
+
+
     /**
      * Metoda odstraňuje předmět z batohu.
      * 
      * @param itemName název předmětu
      * @return {@code true} předmět byl odstraněň z batohu úspěšně; {@code false} předmět nebyl odstraněn z batohu
      */
-    public Item removeItem(String itemName) {
-        return inventory.remove(itemName);
+    public Item removeItem(String itemName){
+        Item removedItem = inventory.remove(itemName);
+        if (removedItem != null) {
+            upozorniPozorovatele(ZmenaHry.ZMENA_INVENTARE);
+        }
+        return removedItem;
     }
     
     /**
@@ -86,5 +103,18 @@ public class Backpack {
         }
         return content;
     }
-    
+    public Collection<Item> getInventory(){
+        return inventory.values();
+
+    }
+    private void upozorniPozorovatele(ZmenaHry zmenaHry) {
+        for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)){
+            pozorovatel.aktualizuj();
+        }
+    }
+    @Override
+    public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
+        seznamPozorovatelu.get(zmenaHry).add(pozorovatel);
+    }
+
 }

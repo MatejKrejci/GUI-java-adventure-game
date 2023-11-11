@@ -164,4 +164,9 @@ public class Item implements Comparable <Item>{
     {
         return name.compareTo(item.getName());
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

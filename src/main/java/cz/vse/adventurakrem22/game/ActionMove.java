@@ -1,4 +1,8 @@
 package cz.vse.adventurakrem22.game;
+
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 /**
  * Třída implementující příkaz pro pohyb mezi herními lokacemi.
  * 
@@ -59,7 +63,12 @@ public class ActionMove implements IAction {
             }
             Area targetArea = currentArea.getExit(parametrName1);
             game.getWorld().setCurrentArea(targetArea);
-            return "Odešel jsem do lokace '" + targetArea.getNameTwo() + "'.\n" + targetArea.getDescription();
+            if (currentArea.getName() != "unikove_okno"){
+                return "Odešel jsem do lokace '" + targetArea.getNameTwo() + "'.\n" + targetArea.getDescription();
+            } else {
+                return "";
+            }
+
         }
         if (parameters.length == 2) {
             String parametrName = (parameters[0] + "_" + parameters[1]);
@@ -72,8 +81,14 @@ public class ActionMove implements IAction {
             }
             Area targetArea = currentArea.getExit(parametrName);
             game.getWorld().setCurrentArea(targetArea);
-            return "Odešel jsem do lokace '" + targetArea.getNameTwo() + "'.\n" + targetArea.getDescription();
+            if (targetArea.getName() != "unikove_okno"){
+                return "Odešel jsem do lokace '" + targetArea.getNameTwo() + "'.\n" + targetArea.getDescription();
+            }else{
+                return "";
+            }
+
         }
         return null;
     }
+
 }

@@ -12,7 +12,7 @@ public class ActionPickTest {
 
     @BeforeEach
     public void setUp() {
-        game = new Game();
+        game = new Game(new Backpack(3));
         backpack = new Backpack(5);
         actionPick = new ActionPick(game, backpack);
     }

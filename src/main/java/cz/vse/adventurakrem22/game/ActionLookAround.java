@@ -1,5 +1,8 @@
 package cz.vse.adventurakrem22.game;
 
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 import java.util.*;
 
 /**
@@ -81,4 +84,5 @@ public class ActionLookAround implements IAction {
 
         return result;
     }
+
 }

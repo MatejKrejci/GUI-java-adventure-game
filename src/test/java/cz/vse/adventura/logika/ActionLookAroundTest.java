@@ -11,7 +11,7 @@ public class ActionLookAroundTest {
 
     @BeforeEach
     public void setUp() {
-        game = new Game();
+        game = new Game(new Backpack(3));
         actionLookAround = new ActionLookAround(game);
     }
 

@@ -12,7 +12,7 @@ public class ActionInvestigateTest {
 
     @BeforeEach
     public void setup() {
-        game = new Game();
+        game = new Game(new Backpack(3));
         action = new ActionInvestigate(game);
     }
 

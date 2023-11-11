@@ -1,4 +1,8 @@
 package cz.vse.adventurakrem22.game;
+
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 /**
  * Třída představuje příkaz pomoc dva.
  * Příkaz pomoc2 vypíše příručku jak vyhrát hru.
@@ -33,4 +37,5 @@ public class ActionHelpTwo implements IAction {
         +"\nJeště je tu jeden způsob jak prohrát hru a to tím, že něco specifickýho sebereš ze země. Ve věznici bys to fakt neměl brát ze země.";
 
     }
+
 }

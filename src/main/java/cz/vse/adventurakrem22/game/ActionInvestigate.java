@@ -1,4 +1,8 @@
 package cz.vse.adventurakrem22.game;
+
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 /**
  * Třída představuje příkaz prouzkoumej.
  * Příkaz prozkoumej vypíše popis daného předmětu.
@@ -82,4 +86,6 @@ public class ActionInvestigate implements IAction {
 
         return null;
     }
+
+
 }
