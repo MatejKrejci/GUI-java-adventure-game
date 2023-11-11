@@ -1,6 +1,5 @@
 package cz.vse.adventurakrem22.start;
 
-import cz.vse.adventurakrem22.start.Pozorovatel;
 import cz.vse.adventurakrem22.game.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -14,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.util.HashMap;
 import java.util.Map;
