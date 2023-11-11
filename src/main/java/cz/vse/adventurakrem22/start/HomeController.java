@@ -20,6 +20,8 @@ import java.util.Optional;
 
 public class HomeController implements Pozorovatel {
     @FXML
+    private ListView<Item> panelPredmetuVProstoru;
+    @FXML
     private ListView<Item> panelInventáře;
     @FXML
     private ImageView hrac;
@@ -41,6 +43,8 @@ public class HomeController implements Pozorovatel {
 
     private ObservableList<Area> seznamVychodu = FXCollections.observableArrayList();
 
+    private ObservableList<Item> predmetyVProstoru = FXCollections.observableArrayList();
+
     private Map<String, Point2D> souradniceProstoru = new HashMap<>();
 
     @FXML
@@ -50,15 +54,18 @@ public class HomeController implements Pozorovatel {
 
         panelVychodu.setItems(seznamVychodu);
         panelInventáře.setItems(inventar);
+        aktualizujPredmetyVProstoru();
 
         hra.getWorld().registruj(ZmenaHry.ZMENA_MISTNOSTI, () -> {
             aktualizujSeznamVychodu();
             aktualizujPolohuHrace();
             aktualizujInventar();
+            aktualizujPredmetyVProstoru();
         });
 
         hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_INVENTARE, () -> {
             aktualizujInventar();
+            aktualizujPredmetyVProstoru();
         });
 
         hra.registruj(ZmenaHry.KONEC_HRY,() -> aktualizujKonecHry());
@@ -66,6 +73,7 @@ public class HomeController implements Pozorovatel {
         vlozSouradnice();
         panelVychodu.setCellFactory(param -> new ListCellProstor());
         panelInventáře.setCellFactory(param -> new ListCellItem());
+        panelPredmetuVProstoru.setCellFactory(param -> new ListCellItem());
     }
 
     private void vlozSouradnice() {
@@ -92,6 +100,14 @@ public class HomeController implements Pozorovatel {
         for (Item item : inventar){
             panelInventáře.getItems().add(item);
         }
+    }
+    public void aktualizujPredmetyVProstoru(){
+        predmetyVProstoru = FXCollections.observableArrayList(hra.getWorld().getCurrentArea().getItems());
+        panelPredmetuVProstoru.getItems().clear();
+        for (Item item : predmetyVProstoru){
+            panelPredmetuVProstoru.getItems().add(item);
+        }
+
     }
 
 
@@ -136,6 +152,7 @@ public class HomeController implements Pozorovatel {
         tlacitkoOdesli.setDisable(hra.isGameOver());
         panelVychodu.setDisable(hra.isGameOver());
         panelInventáře.setDisable(hra.isGameOver());
+        panelPredmetuVProstoru.setDisable(hra.isGameOver());
         }
 
     @FXML
@@ -182,5 +199,14 @@ public class HomeController implements Pozorovatel {
         if (cilovyItem == null) return;
         String prikaz = "poloz " + cilovyItem;
         zpracujPrikaz(prikaz);
+        aktualizujPredmetyVProstoru();
+    }
+
+    public void klikPredmetVProstoru(MouseEvent mouseEvent) {
+        Item cilovyItem = panelPredmetuVProstoru.getSelectionModel().getSelectedItem();
+        if (cilovyItem == null) return;
+        String prikaz = "seber " + cilovyItem;
+        zpracujPrikaz(prikaz);
+        aktualizujPredmetyVProstoru();
     }
 }

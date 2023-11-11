@@ -15,7 +15,7 @@ public class ListCellItem extends ListCell<Item> {
         {
             setText(item.getName());
             ImageView iw = new ImageView(getClass().getResource("Itemy/"+item.getName()+".jpg").toExternalForm());
-            iw.setFitWidth(40);
+            iw.setFitWidth(80);
             iw.setPreserveRatio(true);
             setGraphic(iw);
         }
