@@ -66,6 +66,7 @@ public class Backpack implements PredmetPozorovani {
         if (!isFull() && !containsItem(item.getName())){
             inventory.put(item.getName(), item);
             upozorniPozorovatele(ZmenaHry.ZMENA_INVENTARE);
+            upozorniPozorovatele(ZmenaHry.ZMENA_PROSTORU);
             return true;
         }
         return false;
@@ -83,6 +84,7 @@ public class Backpack implements PredmetPozorovani {
         Item removedItem = inventory.remove(itemName);
         if (removedItem != null) {
             upozorniPozorovatele(ZmenaHry.ZMENA_INVENTARE);
+            upozorniPozorovatele(ZmenaHry.ZMENA_PROSTORU);
         }
         return removedItem;
     }
@@ -106,6 +108,10 @@ public class Backpack implements PredmetPozorovani {
     public Collection<Item> getInventory(){
         return inventory.values();
 
+    }
+    public Item getItemByName(String itemName) {
+        upozorniPozorovatele(ZmenaHry.ZMENA_PROSTORU);
+        return inventory.get(itemName);
     }
     private void upozorniPozorovatele(ZmenaHry zmenaHry) {
         for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)){

@@ -55,8 +55,11 @@ public class ActionDrop implements IAction {
             return "Takovou vec v batohu nemam.";
         }
 
-        Item item = backpack.removeItem(parametrName);
+        Item item = backpack.getItemByName(parametrName);
+        //Item item = backpack.removeItem(parametrName);
         currentArea.addItem(item);
+        backpack.removeItem(parametrName);
+
 
         return "Vyhodil jsem predmet '" + parametrName + "' do aktualni lokace.";
     }

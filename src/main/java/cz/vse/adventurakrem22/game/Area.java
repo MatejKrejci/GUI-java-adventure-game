@@ -1,4 +1,7 @@
 package cz.vse.adventurakrem22.game;
+import cz.vse.adventurakrem22.start.Pozorovatel;
+import cz.vse.adventurakrem22.start.ZmenaHry;
+
 import java.util.*;
 /**
  * Třída představuje lokaci <i>(area, location, lokace)</i> ve scénáři hry.
@@ -12,7 +15,7 @@ import java.util.*;
  * @author Matěj Krejčí
  * @version LS-2023, 2023-25-06
  */
-public class Area implements Comparable<Area> {
+public class Area implements Comparable<Area>{
     private String name;
     private String description;
     private String nameTwo;
@@ -182,7 +185,8 @@ public class Area implements Comparable<Area> {
      * @param item předmět, který bude do lokace přidán.
      */
     public void addItem(Item item) {
-        items.put(item.getName(), item); 
+
+        items.put(item.getName(), item);
     }
     
     /**

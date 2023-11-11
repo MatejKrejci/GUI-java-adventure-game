@@ -37,8 +37,6 @@ public class HomeController implements Pozorovatel {
 
     private Game hra = new Game(new Backpack(3));
 
-    //private Backpack backpack = new Backpack(3);
-
     private ObservableList<Item> inventar = FXCollections.observableArrayList();
 
     private ObservableList<Area> seznamVychodu = FXCollections.observableArrayList();
@@ -52,6 +50,7 @@ public class HomeController implements Pozorovatel {
         vystup.appendText(hra.getPrologue() + "\n\n");
         Platform.runLater(() -> vstup.requestFocus());
 
+        panelPredmetuVProstoru.setItems(predmetyVProstoru);
         panelVychodu.setItems(seznamVychodu);
         panelInventáře.setItems(inventar);
         aktualizujPredmetyVProstoru();
@@ -65,27 +64,31 @@ public class HomeController implements Pozorovatel {
 
         hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_INVENTARE, () -> {
             aktualizujInventar();
+        });
+
+        hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_PROSTORU, () ->{
             aktualizujPredmetyVProstoru();
         });
 
         hra.registruj(ZmenaHry.KONEC_HRY,() -> aktualizujKonecHry());
         aktualizujSeznamVychodu();
         vlozSouradnice();
+
         panelVychodu.setCellFactory(param -> new ListCellProstor());
         panelInventáře.setCellFactory(param -> new ListCellItem());
         panelPredmetuVProstoru.setCellFactory(param -> new ListCellItem());
     }
 
     private void vlozSouradnice() {
-        souradniceProstoru.put("cela", new Point2D(28,26));
-        souradniceProstoru.put("chodba",new Point2D(86,24));
-        souradniceProstoru.put("kantyna",new Point2D(143,100));
-        souradniceProstoru.put("sprchy",new Point2D(139,186));
-        souradniceProstoru.put("straznice",new Point2D(188,24));
-        souradniceProstoru.put("vezenska_zahrada",new Point2D(14,115));
-        souradniceProstoru.put("vezenska_vez",new Point2D(219,85));
-        souradniceProstoru.put("skrys",new Point2D(27,77));
-        souradniceProstoru.put("unikove_okno", new Point2D(28,186));
+        souradniceProstoru.put("cela", new Point2D(121,58));
+        souradniceProstoru.put("chodba",new Point2D(196,60));
+        souradniceProstoru.put("kantyna",new Point2D(318,148));
+        souradniceProstoru.put("sprchy",new Point2D(290,258));
+        souradniceProstoru.put("straznice",new Point2D(498,56));
+        souradniceProstoru.put("vezenska_zahrada",new Point2D(129,168));
+        souradniceProstoru.put("vezenska_vez",new Point2D(435,129));
+        souradniceProstoru.put("skrys",new Point2D(122,120));
+        souradniceProstoru.put("unikove_okno", new Point2D(120,247));
     }
 
     @FXML
@@ -199,7 +202,6 @@ public class HomeController implements Pozorovatel {
         if (cilovyItem == null) return;
         String prikaz = "poloz " + cilovyItem;
         zpracujPrikaz(prikaz);
-        aktualizujPredmetyVProstoru();
     }
 
     public void klikPredmetVProstoru(MouseEvent mouseEvent) {

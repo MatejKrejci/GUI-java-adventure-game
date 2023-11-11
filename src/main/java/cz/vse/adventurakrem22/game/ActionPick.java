@@ -66,7 +66,7 @@ public class ActionPick implements IAction {
             return "Takovej predmet tady nevidim.";
         }
         Item item = currentArea.getItem(parametrName);
-        if (item.getName().equals("basketballovej_mic")) {
+        if (parametrName.equals("basketballovej_mic")) {
             return "Tyvole, já ten míč fakt nebudu brát, jinak mi daj do držky vězni i dozorčí.";
         }
         if (!item.isMoveable()) {
@@ -78,10 +78,12 @@ public class ActionPick implements IAction {
         boolean addedToBackpack = backpack.addItem(item);
         if (addedToBackpack) {
             currentArea.removeItem(parametrName);
+            backpack.getItemByName(parametrName);
             return "Sebral jsem predmet '" + parametrName + "' a ulozil ho do inventare.";
         } else {
             return "Batoh je plny. Nejdrive musim neco zahodit.";
         }
     }
+
 
 }
