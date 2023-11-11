@@ -56,7 +56,6 @@ public class HomeController implements Pozorovatel {
             aktualizujPolohuHrace();
             aktualizujInventar();
         });
-        //hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_INVENTARE, this);
 
         hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_INVENTARE, () -> {
             aktualizujInventar();

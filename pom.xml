@@ -61,17 +61,18 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>cz.vse.adventurakrem22/cz.vse.adventurakrem22.start.Start</mainClass>
                             <launcher>${artifactId}</launcher>
-                            <jlinkZipName>${artifactId}-${project.version}</jlinkZipName>
-                            <jlinkImageName>${artifactId}</jlinkImageName>
+                            <jlinkZipName>${project.artifactId}-${project.version}</jlinkZipName>
+                            <jlinkImageName>${project.artifactId}</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
+                            <!--
                             <release>17</release>
+                            -->
                         </configuration>
                     </execution>
                 </executions>
