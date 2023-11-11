@@ -58,13 +58,17 @@ public class HomeController implements Pozorovatel {
             aktualizujPolohuHrace();
             aktualizujInventar();
         });
-        hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_INVENTARE, this);
-        panelInventáře.setCellFactory(param -> new ListCellItem());
+        //hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_INVENTARE, this);
+
+        hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_INVENTARE, () -> {
+            aktualizujInventar();
+        });
 
         hra.registruj(ZmenaHry.KONEC_HRY,() -> aktualizujKonecHry());
         aktualizujSeznamVychodu();
         vlozSouradnice();
         panelVychodu.setCellFactory(param -> new ListCellProstor());
+        panelInventáře.setCellFactory(param -> new ListCellItem());
     }
 
     private void vlozSouradnice() {
