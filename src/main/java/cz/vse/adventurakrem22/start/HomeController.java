@@ -244,7 +244,11 @@ public class HomeController implements Pozorovatel {
             zpracujPrikaz(prikaz);
 
         }
-        else {
+        else if (cilovyItem.isMoveable() == false){
+            String prikaz = "prozkoumej " + cilovyItem;
+            zpracujPrikaz(prikaz);
+
+        }else {
             String prikaz = "seber " + cilovyItem;
             zpracujPrikaz(prikaz);
             aktualizujPredmetyVProstoru();
