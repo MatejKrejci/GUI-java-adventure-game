@@ -6,13 +6,14 @@
 
     <groupId>cz.vse</groupId>
     <artifactId>Adventura-Krem22</artifactId>
-    <version>1.2</version>
+    <version>1.2.1</version>
     <name>Adventura</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.1</junit.version>
     </properties>
+
 
     <dependencies>
         <dependency>

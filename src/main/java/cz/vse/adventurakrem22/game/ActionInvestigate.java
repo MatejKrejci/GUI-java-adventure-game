@@ -13,14 +13,16 @@ import cz.vse.adventurakrem22.start.ZmenaHry;
  */
 public class ActionInvestigate implements IAction {
     private Game game;
+    private Backpack backpack;
 
     /**
      * Konstruktor třídy
      *
      * @param game hra, ve které se bude příkaz používat
      */
-    public ActionInvestigate(Game game) {
+    public ActionInvestigate(Game game, Backpack backpack) {
         this.game = game;
+        this.backpack = backpack;
     }
 
     /**
@@ -59,6 +61,8 @@ public class ActionInvestigate implements IAction {
                 item.setProzkoumana(true);
                 Item lano = new Item("lano", "Fakt dlouhý lano.", true);
                 currentArea.addItem(lano);
+                backpack.nic();
+
                 return "Prozkoumal jsem truhlu a bylo v ní lano. \nNyní ho můžu sebrat. (seber lano)";
 
             }

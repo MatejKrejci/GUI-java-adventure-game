@@ -1,5 +1,6 @@
 package cz.vse.adventurakrem22.game;
 import cz.vse.adventurakrem22.start.Pozorovatel;
+//import cz.vse.adventurakrem22.start.PredmetPozorovani;
 import cz.vse.adventurakrem22.start.ZmenaHry;
 
 import java.util.*;
@@ -23,6 +24,7 @@ public class Area implements Comparable<Area>{
     private Set<Area> exits;
     private Map<String, Item> items;
     private Map<String, Npc> npcs;
+    private Map<ZmenaHry,Set<Pozorovatel>> seznamPozorovatelu = new HashMap();
 
     /**
      * Konstruktor třídy, vytvoří lokaci se zadaným názvem a popisem.
@@ -185,7 +187,6 @@ public class Area implements Comparable<Area>{
      * @param item předmět, který bude do lokace přidán.
      */
     public void addItem(Item item) {
-
         items.put(item.getName(), item);
     }
     

@@ -38,7 +38,7 @@ public class Game implements PredmetPozorovani {
         actions.add(new ActionTerminate(this));
         actions.add(new ActionMove(this));
         actions.add(new ActionLookAround(this));
-        actions.add(new ActionInvestigate(this));
+        actions.add(new ActionInvestigate(this, backpack));
         actions.add(new ActionPick(this, backpack));
         actions.add(new ActionDrop(this, backpack));
         actions.add(new ActionTalk(this));

@@ -1,6 +1,5 @@
 package cz.vse.adventurakrem22.game;
 
-import cz.vse.adventurakrem22.start.HomeController.*;
 import cz.vse.adventurakrem22.start.Pozorovatel;
 import cz.vse.adventurakrem22.start.ZmenaHry;
 
@@ -18,7 +17,6 @@ import java.util.Set;
 public class ActionPick implements IAction {
     private Game game;
     private Backpack backpack;
-    private Map<ZmenaHry, Set<Pozorovatel>> seznamPozorovatelu = new HashMap<>();
 
     /**
      * Konstruktor třídy.

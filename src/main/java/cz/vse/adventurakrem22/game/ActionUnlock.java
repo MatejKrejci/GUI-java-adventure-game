@@ -55,7 +55,7 @@ public class ActionUnlock implements IAction {
             if (parametrName.equals("truhla")) {
                 if (item.isLocked() && backpack.containsItem("klic")) {
                     item.setLocked(false);
-                    return "Odemkl jsem truhlu.";
+                    return "Odemkl jsem truhlu. Nyní ji ještě musíš prozkoumat.";
                 }
                 else if (item.isLocked() && !backpack.containsItem(parametrName)){
                     return "Bez klíče tuhle truhlu neodemknu";

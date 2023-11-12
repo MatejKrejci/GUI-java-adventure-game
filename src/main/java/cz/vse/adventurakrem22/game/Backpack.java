@@ -109,6 +109,9 @@ public class Backpack implements PredmetPozorovani {
         return inventory.values();
 
     }
+    public void nic(){
+        upozorniPozorovatele(ZmenaHry.ZMENA_PROSTORU);
+    }
     public Item getItemByName(String itemName) {
         upozorniPozorovatele(ZmenaHry.ZMENA_PROSTORU);
         return inventory.get(itemName);

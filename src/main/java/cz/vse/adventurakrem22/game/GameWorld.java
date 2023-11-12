@@ -143,7 +143,9 @@ public class GameWorld implements PredmetPozorovani {
         this.currentArea = currentArea;
         upozorniPozorovatele(ZmenaHry.ZMENA_MISTNOSTI);
     }
-
+    public void metoda(){
+        upozorniPozorovatele(ZmenaHry.ZMENA_PROSTORU);
+    }
 
     /**
      * Metoda vrací danou lokace podle zadaného jména.

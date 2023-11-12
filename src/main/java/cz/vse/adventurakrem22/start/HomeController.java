@@ -103,6 +103,7 @@ public class HomeController implements Pozorovatel {
         for (Item item : inventar){
             panelInventáře.getItems().add(item);
         }
+
     }
     public void aktualizujPredmetyVProstoru(){
         predmetyVProstoru = FXCollections.observableArrayList(hra.getWorld().getCurrentArea().getItems());
@@ -202,13 +203,51 @@ public class HomeController implements Pozorovatel {
         if (cilovyItem == null) return;
         String prikaz = "poloz " + cilovyItem;
         zpracujPrikaz(prikaz);
+
+        /**
+        if (cilovyItem.getName() != "klic"){
+            String prikaz = "poloz " + cilovyItem;
+            zpracujPrikaz(prikaz);
+        }else if (cilovyItem.getName() == "klic" && hra.getWorld().getCurrentArea().getName() == "vezenska_vez" && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked() == true){
+            String prikaz = "odemkni truhla";
+            zpracujPrikaz(prikaz);
+        }else {
+            String prikaz = "poloz " + cilovyItem;
+            zpracujPrikaz(prikaz);
+        }*/
+
     }
 
-    public void klikPredmetVProstoru(MouseEvent mouseEvent) {
+   /** public void klikPredmetVProstoru(MouseEvent mouseEvent) {
         Item cilovyItem = panelPredmetuVProstoru.getSelectionModel().getSelectedItem();
         if (cilovyItem == null) return;
         String prikaz = "seber " + cilovyItem;
         zpracujPrikaz(prikaz);
         aktualizujPredmetyVProstoru();
+    }*/
+    @FXML
+    public void klikPredmetVProstoru(MouseEvent mouseEvent) {
+        Item cilovyItem = panelPredmetuVProstoru.getSelectionModel().getSelectedItem();
+        if (cilovyItem == null) return;
+
+        if (cilovyItem.getName().equals("truhla")
+                && hra.getWorld().getCurrentArea().getName().equals("vezenska_vez")
+                && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked()) {
+
+            String prikaz = "odemkni truhla";
+            zpracujPrikaz(prikaz);
+        }else if (cilovyItem.getName().equals("truhla")
+                && hra.getWorld().getCurrentArea().getName().equals("vezenska_vez")
+                && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked() == false){
+
+            String prikaz = "prozkoumej truhla";
+            zpracujPrikaz(prikaz);
+
+        }
+        else {
+            String prikaz = "seber " + cilovyItem;
+            zpracujPrikaz(prikaz);
+            aktualizujPredmetyVProstoru();
+        }
     }
 }
