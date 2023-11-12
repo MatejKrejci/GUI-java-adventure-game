@@ -232,11 +232,10 @@ public class HomeController implements Pozorovatel {
 
         if (cilovyItem.getName().equals("truhla")
                 && hra.getWorld().getCurrentArea().getName().equals("vezenska_vez")
-                && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked()) {
-
+                && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked()){
             String prikaz = "odemkni truhla";
             zpracujPrikaz(prikaz);
-        }else if (cilovyItem.getName().equals("truhla")
+        } else if (cilovyItem.getName().equals("truhla")
                 && hra.getWorld().getCurrentArea().getName().equals("vezenska_vez")
                 && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked() == false){
 
@@ -244,7 +243,7 @@ public class HomeController implements Pozorovatel {
             zpracujPrikaz(prikaz);
 
         }
-        else if (cilovyItem.isMoveable() == false){
+        else if (cilovyItem.getProzkoumana() == false){
             String prikaz = "prozkoumej " + cilovyItem;
             zpracujPrikaz(prikaz);
 

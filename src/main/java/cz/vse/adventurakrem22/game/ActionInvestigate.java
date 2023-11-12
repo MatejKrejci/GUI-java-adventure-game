@@ -68,6 +68,7 @@ public class ActionInvestigate implements IAction {
             }
 
             if (parametrName.equals("truhla") && item.getProzkoumana() == false && item.isLocked()) {
+                item.setProzkoumana(true);
                 return "Prozkoumávám předmět '" + parametrName + "'.\n" + item.getDescription() + "\nK odemknutí téhle truhly nejspíš potřebuješ nějaký klíč.";
             }
 
@@ -75,6 +76,7 @@ public class ActionInvestigate implements IAction {
                 return "Prozkoumávám předmět '" + parametrName + "'.\n" + item.getDescription() + "\nTuhle truhlu jsem již otevřel a prozkoumal, bylo v ní lano."; 
             }
 
+            item.setProzkoumana(true);
             return "Prozkoumávám předmět '" + parametrName + "'.\n" + item.getDescription();
         }
 
