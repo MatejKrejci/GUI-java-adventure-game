@@ -107,7 +107,13 @@ public class Npc implements Comparable <Npc>{
 
         return false;
     }
-    
+    /**
+     * Porovnává tuto postavu s danou postavou na základě jejich jména.
+     *
+     * @param npc Postava, s níž se má tato postava porovnat.
+     * @return Kladné číslo, pokud je jméno této postavy větší než jméno postavy dané, záporné číslo,
+     *         pokud je jméno této postavy menší než jméno postavy dané, 0, pokud jsou jména stejná.
+     */
     @Override
     public int compareTo(Npc npc)
     {

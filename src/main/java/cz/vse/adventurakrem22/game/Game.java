@@ -168,10 +168,21 @@ public class Game implements PredmetPozorovani {
         return epilogue;
     }
 
+    /**
+     * Registruje pozorovatele pro sledování určité změny ve hře.
+     *
+     * @param zmenaHry      Typ změny, kterou má pozorovatel sledovat (např. {@link ZmenaHry#ZMENA_PROSTORU}).
+     * @param pozorovatel   Instance pozorovatele, která bude informována o změně.
+     */
     @Override
     public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
         seznamPozorovatelu.get(zmenaHry).add(pozorovatel);
     }
+    /**
+     * Upozorní všechny registrované pozorovatele na určitý typ změny ve hře.
+     *
+     * @param zmenaHry Typ změny, na kterou mají být pozorovatelé upozorněni (např. {@link ZmenaHry#ZMENA_PROSTORU}).
+     */
     private void upozorniPozorovatele(ZmenaHry zmenaHry) {
         for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)){
             pozorovatel.aktualizuj();

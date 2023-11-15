@@ -197,13 +197,30 @@ public class GameWorld implements PredmetPozorovani {
         return GameState.PLAYING;
     }
 
+    /**
+     * Vrátí batoh (inventář) aktuálního hráče.
+     *
+     * @return Batoh aktuálního hráče
+     */
     public Backpack getBackpack(){
         return backpack;
     }
+
+    /**
+     * Registruje pozorovatele pro sledování změn v hře.
+     *
+     * @param zmenaHry      Typ změny v hře, kterou chcete sledovat
+     * @param pozorovatel   Objekt implementující rozhraní Pozorovatel
+     */
     @Override
     public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
         seznamPozorovatelu.get(zmenaHry).add(pozorovatel);
     }
+    /**
+     * Upozorní všechny registrované pozorovatele na změnu v hře.
+     *
+     * @param zmenaHry Typ změny v hře, o které se má pozorovatele informovat
+     */
     private void upozorniPozorovatele(ZmenaHry zmenaHry) {
         for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)){
             pozorovatel.aktualizuj();

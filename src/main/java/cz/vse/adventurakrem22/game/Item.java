@@ -159,12 +159,20 @@ public class Item implements Comparable <Item>{
         return false;
     }
 
+    /**
+     * Implementace rozhraní Comparable pro porovnání položek podle názvu.
+     */
     @Override
     public int compareTo(Item item)
     {
         return name.compareTo(item.getName());
     }
 
+    /**
+     * Převede položku na řetězec, vracející její název.
+     *
+     * @return Název položky ve formě řetězce
+     */
     @Override
     public String toString() {
         return getName();

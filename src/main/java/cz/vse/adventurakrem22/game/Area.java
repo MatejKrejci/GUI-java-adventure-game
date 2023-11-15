@@ -300,16 +300,18 @@ public class Area implements Comparable<Area>{
 
         return false;
     }
-    
+    /**
+     * Porovnává tuto oblast s danou oblastí na základě jejich jména.
+     *
+     * @param area Oblast, s níž se má tato oblast porovnat.
+     * @return Kladné číslo, pokud je jméno této oblasti větší než jméno oblasti dané, záporné číslo,
+     *         pokud je jméno této oblasti menší než jméno oblasti dané, 0, pokud jsou jména stejná.
+     */
     @Override
     public int compareTo(Area area)
     {
         return name.compareTo(area.getName());
     }
 
-    /**@Override
-    public String toString() {
-        return getNameTwo();
-    }*/
 }
 

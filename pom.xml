@@ -71,9 +71,6 @@
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
-                            <!--
-                            <release>17</release>
-                            -->
                         </configuration>
                     </execution>
                 </executions>

@@ -105,22 +105,47 @@ public class Backpack implements PredmetPozorovani {
         }
         return content;
     }
+    /**
+     * Vrátí kolekci všech předmětů v inventáři.
+     *
+     * @return Kolekce všech předmětů v inventáři.
+     */
     public Collection<Item> getInventory(){
         return inventory.values();
 
     }
+    /**
+     * Metoda pro účel, který není důležitý pro rozhraní, nicméně upozorní pozorovatele na změnu prostoru.
+     */
     public void nic(){
         upozorniPozorovatele(ZmenaHry.ZMENA_PROSTORU);
     }
+    /**
+     * Vrátí předmět z inventáře podle zadaného jména.
+     *
+     * @param itemName Jméno předmětu, který chcete získat.
+     * @return Předmět z inventáře se zadaným jménem nebo {@code null}, pokud není nalezen.
+     */
     public Item getItemByName(String itemName) {
         upozorniPozorovatele(ZmenaHry.ZMENA_PROSTORU);
         return inventory.get(itemName);
     }
+    /**
+     * Upozorní všechny registrované pozorovatele na určitý typ změny ve hře.
+     *
+     * @param zmenaHry Typ změny, na kterou mají být pozorovatelé upozorněni (např. {@link ZmenaHry#ZMENA_PROSTORU}).
+     */
     private void upozorniPozorovatele(ZmenaHry zmenaHry) {
         for (Pozorovatel pozorovatel : seznamPozorovatelu.get(zmenaHry)){
             pozorovatel.aktualizuj();
         }
     }
+    /**
+     * Registruje pozorovatele pro sledování určité změny ve hře.
+     *
+     * @param zmenaHry Typ změny, kterou má pozorovatel sledovat (např. {@link ZmenaHry#ZMENA_PROSTORU}).
+     * @param pozorovatel Instance pozorovatele, která bude informována o změně.
+     */
     @Override
     public void registruj(ZmenaHry zmenaHry, Pozorovatel pozorovatel) {
         seznamPozorovatelu.get(zmenaHry).add(pozorovatel);

@@ -41,6 +41,12 @@ public class Start extends Application {
 
     }
 
+    /**
+     * Metoda pro inicializaci a spuštění grafického rozhraní.
+     *
+     * @param primaryStage Hlavní stage pro zobrazení grafického rozhraní
+     * @throws Exception Chyba při inicializaci grafického rozhraní
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();

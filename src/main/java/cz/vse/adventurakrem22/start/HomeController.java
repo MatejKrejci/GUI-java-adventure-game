@@ -18,6 +18,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Controller třída pro grafické rozhraní hry.
+ * Implementuje rozhraní {@link Pozorovatel} pro sledování změn ve hře.
+ */
 public class HomeController implements Pozorovatel {
     @FXML
     private ListView<Item> panelPredmetuVProstoru;
@@ -45,6 +49,10 @@ public class HomeController implements Pozorovatel {
 
     private Map<String, Point2D> souradniceProstoru = new HashMap<>();
 
+    /**
+     * Inicializační metoda, která se volá při startu grafického rozhraní.
+     * Nastavuje počáteční stav a obsah grafických komponent.
+     */
     @FXML
     private void initialize(){
         vystup.appendText(hra.getPrologue() + "\n\n");
@@ -79,6 +87,9 @@ public class HomeController implements Pozorovatel {
         panelPredmetuVProstoru.setCellFactory(param -> new ListCellItem());
     }
 
+    /**
+     * Metoda pro vložení počátečních souřadnic prostory do mapy souradniceProstoru.
+     */
     private void vlozSouradnice() {
         souradniceProstoru.put("cela", new Point2D(121,58));
         souradniceProstoru.put("chodba",new Point2D(196,60));
@@ -91,11 +102,18 @@ public class HomeController implements Pozorovatel {
         souradniceProstoru.put("unikove_okno", new Point2D(120,247));
     }
 
+    /**
+     * Metoda pro aktualizaci seznamu východů v listview.
+     */
     @FXML
     private void aktualizujSeznamVychodu() {
         seznamVychodu.clear();
         seznamVychodu.addAll(hra.getWorld().getCurrentArea().getAllExits());
     }
+
+    /**
+     * Metoda pro aktualizaci inventáře v listview.
+     */
     @FXML
     public void aktualizujInventar() {
         inventar = FXCollections.observableArrayList(hra.getWorld().getBackpack().getInventory());
@@ -105,6 +123,9 @@ public class HomeController implements Pozorovatel {
         }
 
     }
+    /**
+     * Metoda pro aktualizaci předmětů v aktuálním prostoru v listview.
+     */
     public void aktualizujPredmetyVProstoru(){
         predmetyVProstoru = FXCollections.observableArrayList(hra.getWorld().getCurrentArea().getItems());
         panelPredmetuVProstoru.getItems().clear();
@@ -114,7 +135,9 @@ public class HomeController implements Pozorovatel {
 
     }
 
-
+    /**
+     * Metoda pro aktualizaci polohy hráče v grafickém rozhraní.
+     */
     private void aktualizujPolohuHrace() {
         String prostor = hra.getWorld().getCurrentArea().getName();
         hrac.setLayoutX(souradniceProstoru.get(prostor).getX());
@@ -122,6 +145,9 @@ public class HomeController implements Pozorovatel {
 
     }
 
+    /**
+     * Metoda pro zpracování vstupu hráče po stisknutí tlačítka Odešli.
+     */
     @FXML
     private void OdešliVstup(ActionEvent actionEvent) {
         String prikaz = vstup.getText();
@@ -130,6 +156,10 @@ public class HomeController implements Pozorovatel {
         zpracujPrikaz(prikaz);
     }
 
+    /**
+     * Metoda pro zpracování příkazu hráče a aktualizaci výstupního pole.
+     * @param prikaz Příkaz zadaný hráčem.
+     */
     private void zpracujPrikaz(String prikaz) {
         vystup.appendText("> "+ prikaz + "\n");
         String vysledek = hra.processAction(prikaz);
@@ -139,6 +169,10 @@ public class HomeController implements Pozorovatel {
 
     }
 
+    /**
+     * Metoda pro ukončení hry s potvrzením.
+     * @param actionEvent Událost tlačítka.
+     */
     public void ukoncitHru(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Jseš si jistý, že chceš ukončit hru?");
         Optional<ButtonType> result = alert.showAndWait();
@@ -147,7 +181,9 @@ public class HomeController implements Pozorovatel {
         }
     }
 
-
+    /**
+     * Metoda pro kontrolu skončení hry a případného vypnutí grafických prvků
+     */
     private void aktualizujKonecHry() {
         if (hra.isGameOver()){
             vystup.appendText(hra.getEpilogue());
@@ -159,6 +195,11 @@ public class HomeController implements Pozorovatel {
         panelPredmetuVProstoru.setDisable(hra.isGameOver());
         }
 
+    /**
+     * Metoda při kliknutí na panel východů přesune hráče do vybrané oblasti.
+     *
+     * @param mouseEvent Událost kliknutí myší.
+     */
     @FXML
     private void klikPanelVychodu(MouseEvent mouseEvent) {
         Area cil = panelVychodu.getSelectionModel().getSelectedItem();
@@ -166,6 +207,11 @@ public class HomeController implements Pozorovatel {
         String prikaz = "jdi " + cil.getNameTwo();
         zpracujPrikaz(prikaz);
     }
+    /**
+     * Metoda při požadavku na nápovědu zobrazí okno s webovou nápovědou.
+     *
+     * @param actionEvent Událost požadavku na nápovědu.
+     */
     @FXML
     private void napovedaKlik(ActionEvent actionEvent) {
         Stage napovedaStage = new Stage();
@@ -176,6 +222,11 @@ public class HomeController implements Pozorovatel {
         wv.getEngine().load(getClass().getResource("napoveda.html").toExternalForm());
     }
 
+    /**
+     * Metoda pro restart hry s potvrzením uživatele.
+     *
+     * @param actionEvent Událost požadavku na restart hry.
+     */
     public void restartHryKlik(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Jsi si jistý, že chceš restartovat hru?");
         Optional<ButtonType> result = alert.showAndWait();
@@ -192,39 +243,33 @@ public class HomeController implements Pozorovatel {
         }
     }
 
+    /**
+     * Metoda pro aktualizaci UI při změně inventáře.
+     */
     @Override
     public void aktualizuj() {
             aktualizujInventar();
     }
 
+    /**
+     * Metoda při kliknutí na inventářový panel provede akci položení vybraného předmětu.
+     *
+     * @param mouseEvent Událost kliknutí myší.
+     */
     @FXML
     private void klikInventar(MouseEvent mouseEvent) {
         Item cilovyItem = panelInventáře.getSelectionModel().getSelectedItem();
         if (cilovyItem == null) return;
         String prikaz = "poloz " + cilovyItem;
         zpracujPrikaz(prikaz);
-
-        /**
-        if (cilovyItem.getName() != "klic"){
-            String prikaz = "poloz " + cilovyItem;
-            zpracujPrikaz(prikaz);
-        }else if (cilovyItem.getName() == "klic" && hra.getWorld().getCurrentArea().getName() == "vezenska_vez" && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked() == true){
-            String prikaz = "odemkni truhla";
-            zpracujPrikaz(prikaz);
-        }else {
-            String prikaz = "poloz " + cilovyItem;
-            zpracujPrikaz(prikaz);
-        }*/
-
     }
 
-   /** public void klikPredmetVProstoru(MouseEvent mouseEvent) {
-        Item cilovyItem = panelPredmetuVProstoru.getSelectionModel().getSelectedItem();
-        if (cilovyItem == null) return;
-        String prikaz = "seber " + cilovyItem;
-        zpracujPrikaz(prikaz);
-        aktualizujPredmetyVProstoru();
-    }*/
+    /**
+     * Metoda pro obsluhu kliknutí na předmět v aktuálním prostoru.
+     * Zpracovává různé akce v závislosti na typu a stavu předmětu.
+     *
+     * @param mouseEvent Událost kliknutí myší.
+     */
     @FXML
     public void klikPredmetVProstoru(MouseEvent mouseEvent) {
         Item cilovyItem = panelPredmetuVProstoru.getSelectionModel().getSelectedItem();

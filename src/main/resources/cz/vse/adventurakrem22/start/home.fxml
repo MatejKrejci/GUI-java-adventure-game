@@ -19,80 +19,100 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.adventurakrem22.start.HomeController">
-  <columnConstraints>
-    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" prefWidth="1300.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints valignment="CENTER" vgrow="NEVER" />
-      <RowConstraints minHeight="10.0" vgrow="NEVER" />
-    <RowConstraints prefHeight="450.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-  </rowConstraints>
-   <children>
-      <MenuBar GridPane.columnSpan="2147483647">
-        <menus>
-          <Menu mnemonicParsing="false" text="Hra">
+
+    <!-- Sloupce v gridu -->
+    <columnConstraints>
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" prefWidth="1300.0" />
+    </columnConstraints>
+
+    <!-- Řádky v gridu -->
+    <rowConstraints>
+        <RowConstraints valignment="CENTER" vgrow="NEVER" />
+        <RowConstraints minHeight="10.0" vgrow="NEVER" />
+        <RowConstraints prefHeight="450.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+    </rowConstraints>
+
+    <children>
+        <!-- Menu bar -->
+        <MenuBar GridPane.columnSpan="2147483647">
+            <menus>
+                <Menu mnemonicParsing="false" text="Hra">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ukoncitHru" text="Ukončit" />
+                        <MenuItem onAction="#napovedaKlik" text="Nápověda" />
+                        <MenuItem onAction="#restartHryKlik" text="Restart" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+
+        <!-- HBox pro textový vstup a tlačítko -->
+        <HBox prefHeight="38.0" prefWidth="654.0" spacing="15.0" GridPane.rowIndex="3">
+            <children>
+                <TextField fx:id="vstup" onAction="#OdešliVstup" HBox.hgrow="ALWAYS" />
+                <Button fx:id="tlacitkoOdesli" mnemonicParsing="false" onAction="#OdešliVstup" text="Odešli">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Button>
+            </children>
+            <GridPane.margin>
+                <Insets bottom="3.0" />
+            </GridPane.margin>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </HBox>
+
+        <!-- SplitPane pro seznam předmětů a prostorů a výstup -->
+        <SplitPane dividerPositions="0.5" GridPane.rowIndex="2">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#ukoncitHru" text="Ukončit" />
-                <MenuItem onAction="#napovedaKlik" text="Nápověda" />
-                <MenuItem onAction="#restartHryKlik" text="Restart" />
+                <!-- Vnitřní SplitPane pro seznam předmětů a seznam prostorů -->
+                <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+                    <items>
+                        <ListView fx:id="panelInventáře" onMouseClicked="#klikInventar" />
+                        <ListView fx:id="panelPredmetuVProstoru" onMouseClicked="#klikPredmetVProstoru" />
+                    </items>
+                </SplitPane>
+                <!-- Výstup hry -->
+                <TextArea fx:id="vystup" editable="false" />
             </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <HBox prefHeight="38.0" prefWidth="654.0" spacing="15.0" GridPane.rowIndex="3">
-         <children>
-            <TextField fx:id="vstup" onAction="#OdešliVstup" HBox.hgrow="ALWAYS" />
-            <Button fx:id="tlacitkoOdesli" mnemonicParsing="false" onAction="#OdešliVstup" text="Odešli">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Button>
-         </children>
-         <GridPane.margin>
-            <Insets bottom="3.0" />
-         </GridPane.margin>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </HBox>
-      <SplitPane dividerPositions="0.5" GridPane.rowIndex="2">
-         <items>
-            <SplitPane dividerPositions="0.5" orientation="VERTICAL">
-              <items>
-                  <ListView fx:id="panelInventáře" onMouseClicked="#klikInventar" />
-                  <ListView fx:id="panelPredmetuVProstoru" onMouseClicked="#klikPredmetVProstoru" />
-              </items>
-            </SplitPane>
-            <TextArea fx:id="vystup" editable="false" />
-         </items>
-      </SplitPane>
-      <TitledPane text="Mapa a exity" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
-         <content>
-            <HBox alignment="TOP_CENTER">
-               <children>
-                  <SplitPane dividerPositions="0.5" prefWidth="10000.0">
-                     <items>
-                        <Pane>
-                           <children>
-                              <ImageView fitHeight="298.0" fitWidth="500.0" layoutX="68.0" layoutY="27.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@herniPlan.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="hrac" fitHeight="58.0" fitWidth="56.0" layoutX="121.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@hrac.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <ListView fx:id="panelVychodu" onMouseClicked="#klikPanelVychodu" />
-                     </items>
-                  </SplitPane>
-               </children>
-            </HBox>
-         </content>
-      </TitledPane>
-   </children>
+        </SplitPane>
+
+        <!-- TitledPane pro mapu a exity -->
+        <TitledPane text="Mapa a exity" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+            <content>
+                <!-- HBox pro mapu, hráče a seznam východů -->
+                <HBox alignment="TOP_CENTER">
+                    <children>
+                        <!-- Vnitřní SplitPane pro mapu a seznam východů -->
+                        <SplitPane dividerPositions="0.5" prefWidth="10000.0">
+                            <items>
+                                <!-- Pane pro zobrazení mapy a hráče -->
+                                <Pane>
+                                    <children>
+                                        <!-- ImageView pro zobrazení mapy -->
+                                        <ImageView fitHeight="298.0" fitWidth="500.0" layoutX="68.0" layoutY="27.0" pickOnBounds="true">
+                                            <image>
+                                                <Image url="@herniPlan.png" />
+                                            </image>
+                                        </ImageView>
+                                        <!-- ImageView pro zobrazení hráče -->
+                                        <ImageView fx:id="hrac" fitHeight="58.0" fitWidth="56.0" layoutX="121.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@hrac.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </Pane>
+                                <!-- Seznam východů -->
+                                <ListView fx:id="panelVychodu" onMouseClicked="#klikPanelVychodu" />
+                            </items>
+                        </SplitPane>
+                    </children>
+                </HBox>
+            </content>
+        </TitledPane>
+    </children>
 </GridPane>
