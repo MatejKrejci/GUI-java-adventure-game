@@ -31,7 +31,7 @@ public class ActionUnlock implements IAction {
      * @return název možných variant příkazů
      */
     public String getName() {
-        return "odemkni/odemknout/unlock/otevrit/otevri";
+        return "odemkni/odemknout/unlock/otevrit/otevri/odemikam";
     }
 
     /**

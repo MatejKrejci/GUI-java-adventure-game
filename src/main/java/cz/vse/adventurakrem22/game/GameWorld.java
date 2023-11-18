@@ -89,10 +89,10 @@ public class GameWorld implements PredmetPozorovani {
         Item ryze = new Item("ryze", "Hnusná rejže, co byla dnes k obědu.", true);
         Item maso = new Item("maso", "Plesnivý maso, co bylo dnes k obědu.", true);
 
-        Npc straz = new Npc("straz", "Tenhle zm*d tady každej den někoho bije.",true, "Chceš dostat do držky?!");
-        Npc spoluvezen = new Npc("spoluvezen", "Ten by mi možná mohl poradit jak odtud utéct.", true, "Odtud neutečeš, jsou tady fakt vysoký zdi.");
-        Npc ricardo = new Npc("ricardo", "Říká se, že odtud už několikrát utekl.", true, "Já jsem vždycky k útěku použil dlouhý lano" + "\n" + "*chvilka ticha* \n" + "Možná zkus utéct ze skrýše, ale musíš ji nejdřív najít."  );
-        Npc escobar = new Npc("escobar", "Od tý doby, co ho chytili toho moc nenamluví");
+        Npc straz = new Npc("straz", "Tenhle zm*d tady každej den někoho bije.",true, "Chceš dostat do držky?!",false,false );
+        Npc spoluvezen = new Npc("spoluvezen", "Ten by mi možná mohl poradit jak odtud utéct.", true, "Odtud neutečeš, jsou tady fakt vysoký zdi.",false,false );
+        Npc ricardo = new Npc("ricardo", "Říká se, že odtud už několikrát utekl.", true, "Já jsem vždycky k útěku použil dlouhý lano" + "\n" + "*chvilka ticha* \n" + "Možná zkus utéct ze skrýše, ale musíš ji nejdřív najít.",false,false );
+        Npc escobar = new Npc("escobar", "Od tý doby, co ho chytili toho moc nenamluví", false, false);
 
         cela.addItem(postel);
         cela.addItem(stul);

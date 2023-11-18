@@ -31,7 +31,7 @@ public class ActionDrop implements IAction {
      * @return název možných variant příkazů
      */
     public String getName() {
-        return "poloz/vyhod/odhod/zahod/drop/throw_out/polozit/vyhodit/odhodit/zahodit";
+        return "poloz/vyhod/odhod/zahod/drop/throw_out/polozit/vyhodit/odhodit/zahodit/pokladam";
     }
 
     /**

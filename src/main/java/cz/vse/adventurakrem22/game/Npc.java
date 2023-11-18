@@ -12,10 +12,35 @@ public class Npc implements Comparable <Npc>{
     private String description;
     private boolean talks;
     private String dialog;
+    private boolean alreadyTalked;
+    private boolean jeProzkoumany;
 
     /**
      * Konstruktor třídy, vytvoří postavu se zadaným názvem, popisem, dialogem a boolean hodnotou zda postava mluví.
      * 
+     * @param name jméno postavy
+     * @param description popisek postavy
+     * @param talks mluví postava
+     * @param dialog co řekne postava po použití příkazu mluv
+     * @param alreadyTalked postava už mluvila
+     */
+    public Npc (String name, String description, boolean talks, String dialog, boolean alreadyTalked, boolean jeProzkoumany) {
+        this.name = name;
+        this.description = description;
+        this.talks = talks;
+        this.dialog = dialog;
+        this.alreadyTalked = alreadyTalked;
+        this.jeProzkoumany = jeProzkoumany;
+    }
+    public Npc (String name, String description,boolean alreadyTalked, boolean jeProzkoumany) {
+        this.name = name;
+        this.description = description;
+        this.alreadyTalked = alreadyTalked;
+        this.jeProzkoumany = jeProzkoumany;
+    }
+    /**
+     * Konstruktor třídy, vytvoří postavu se zadaným názvem, popisem, dialogem a boolean hodnotou zda postava mluví.
+     *
      * @param name jméno postavy
      * @param description popisek postavy
      * @param talks mluví postava
@@ -58,6 +83,8 @@ public class Npc implements Comparable <Npc>{
         return description;
     }
 
+    public boolean getJeProzkoumany(){ return jeProzkoumany; }
+
     /**
      * Metoda vrací dialog postavy
      * 
@@ -75,9 +102,17 @@ public class Npc implements Comparable <Npc>{
     public boolean talks() {
         return talks;
     }
-        /**
+
+    public void setAlreadyTalked(boolean alreadyTalked){
+        this.alreadyTalked = alreadyTalked;
+    }
+    public void setJeProzkoumany(boolean jeProzkoumany) {this.jeProzkoumany = jeProzkoumany;}
+    public boolean getAlreadyTalked(){
+        return alreadyTalked;
+    }
+     /**
      * Metoda porovnává dvě lokace <i>(objekty)</i>. Lokace jsou shodné,
-     * pokud mají stejný název <i>(atribut {@link #nazev})</i>. Tato metoda
+     * pokud mají stejný název <i>(atribut)</i>. Tato metoda
      * je důležitá pro správné fungování množiny východů do sousedních
      * lokací.
      * <p>
@@ -118,5 +153,9 @@ public class Npc implements Comparable <Npc>{
     public int compareTo(Npc npc)
     {
         return name.compareTo(npc.getName());
+    }
+    @Override
+    public String toString() {
+        return getName();
     }
 }

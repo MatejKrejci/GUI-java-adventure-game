@@ -29,7 +29,7 @@ public class ActionTalk implements IAction {
      * @return název možných variant příkazů
      */
     public String getName() {
-        return "mluv/promluv/mluv_s/talk/talk_with/mluvit/promluvit/mluvit_s";
+        return "mluv/promluv/mluv_s/talk/talk_with/mluvit/promluvit/mluvit_s/mluvim_s";
     }
     
     /**
@@ -61,6 +61,7 @@ public class ActionTalk implements IAction {
                 skrys.setIsHidden(false);
                 cela.addExit(game.getWorld().getArea("skrys"));
                 skrys.addExit(game.getWorld().getArea("cela"));
+                npc.setAlreadyTalked(true);
                 String dialog = npc.getDialog();
                 String capitalizedParametrName = parametrName.substring(0, 1).toUpperCase() + parametrName.substring(1);
                 return capitalizedParametrName + " říká: '" + dialog + "'.";

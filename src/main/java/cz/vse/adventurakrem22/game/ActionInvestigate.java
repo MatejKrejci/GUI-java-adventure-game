@@ -32,7 +32,7 @@ public class ActionInvestigate implements IAction {
      * @return název možných variant příkazů
      */
     public String getName() {
-        return "prozkoumej/prozkoumat/zkoumat/explore/investigate/zkoumej";
+        return "prozkoumej/prozkoumat/zkoumat/explore/investigate/zkoumej/prozkoumavam";
     }
 
     /**
@@ -82,6 +82,7 @@ public class ActionInvestigate implements IAction {
 
         if (currentArea.containsNpc(parametrName)) {
             Npc npc = currentArea.getNpc(parametrName);
+            npc.setAlreadyTalked(true);
             return "Zjisťuješ kdo je '" + parametrName + "'.\n" + npc.getDescription();
         }
 

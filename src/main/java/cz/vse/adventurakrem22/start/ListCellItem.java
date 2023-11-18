@@ -20,15 +20,13 @@ public class ListCellItem extends ListCell<Item> {
         if (empty){
             setText(null);
             setGraphic(null);
-        }else
-        {
+        } else {
             setText(item.getName());
             ImageView iw = new ImageView(getClass().getResource("Itemy/"+item.getName()+".jpg").toExternalForm());
-            iw.setFitWidth(80);
+            iw.setFitWidth(70);
             iw.setPreserveRatio(true);
+            setStyle("-fx-font-size: 10");
             setGraphic(iw);
         }
-
-
     }
 }

@@ -27,7 +27,7 @@ public class ActionUnlockTest {
         backpack.addItem(key);
         game.getWorld().setCurrentArea(currentArea);
         String[] parameters = { "truhla" };
-        String expected = "Odemkl jsem truhlu.";
+        String expected = "Odemkl jsem truhlu. Nyní ji ještě musíš prozkoumat.";
         String result = actionUnlock.execute(parameters);
         assertFalse(chest.isLocked());
         assertEquals(expected, result);

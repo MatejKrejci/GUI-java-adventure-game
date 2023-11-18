@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
@@ -23,6 +24,10 @@ import java.util.Optional;
  * Implementuje rozhraní {@link Pozorovatel} pro sledování změn ve hře.
  */
 public class HomeController implements Pozorovatel {
+    @FXML
+    private ListView panelPostavVProstoru;
+    @FXML
+    private javafx.scene.image.ImageView ImageView;
     @FXML
     private ListView<Item> panelPredmetuVProstoru;
     @FXML
@@ -39,6 +44,8 @@ public class HomeController implements Pozorovatel {
     @FXML
     private TextField vstup;
 
+
+
     private Game hra = new Game(new Backpack(3));
 
     private ObservableList<Item> inventar = FXCollections.observableArrayList();
@@ -46,6 +53,8 @@ public class HomeController implements Pozorovatel {
     private ObservableList<Area> seznamVychodu = FXCollections.observableArrayList();
 
     private ObservableList<Item> predmetyVProstoru = FXCollections.observableArrayList();
+
+    private ObservableList<Npc> postavyVProstoru = FXCollections.observableArrayList();
 
     private Map<String, Point2D> souradniceProstoru = new HashMap<>();
 
@@ -61,13 +70,16 @@ public class HomeController implements Pozorovatel {
         panelPredmetuVProstoru.setItems(predmetyVProstoru);
         panelVychodu.setItems(seznamVychodu);
         panelInventáře.setItems(inventar);
+        panelPostavVProstoru.setItems(postavyVProstoru);
         aktualizujPredmetyVProstoru();
+        aktualizujPostavyVProstoru();
 
         hra.getWorld().registruj(ZmenaHry.ZMENA_MISTNOSTI, () -> {
             aktualizujSeznamVychodu();
             aktualizujPolohuHrace();
             aktualizujInventar();
             aktualizujPredmetyVProstoru();
+            aktualizujPostavyVProstoru();
         });
 
         hra.getWorld().getBackpack().registruj(ZmenaHry.ZMENA_INVENTARE, () -> {
@@ -85,21 +97,29 @@ public class HomeController implements Pozorovatel {
         panelVychodu.setCellFactory(param -> new ListCellProstor());
         panelInventáře.setCellFactory(param -> new ListCellItem());
         panelPredmetuVProstoru.setCellFactory(param -> new ListCellItem());
+        panelPostavVProstoru.setCellFactory(param -> new ListCellNpc());
     }
 
     /**
      * Metoda pro vložení počátečních souřadnic prostory do mapy souradniceProstoru.
      */
     private void vlozSouradnice() {
-        souradniceProstoru.put("cela", new Point2D(121,58));
-        souradniceProstoru.put("chodba",new Point2D(196,60));
-        souradniceProstoru.put("kantyna",new Point2D(318,148));
-        souradniceProstoru.put("sprchy",new Point2D(290,258));
-        souradniceProstoru.put("straznice",new Point2D(498,56));
-        souradniceProstoru.put("vezenska_zahrada",new Point2D(129,168));
-        souradniceProstoru.put("vezenska_vez",new Point2D(435,129));
-        souradniceProstoru.put("skrys",new Point2D(122,120));
-        souradniceProstoru.put("unikove_okno", new Point2D(120,247));
+        souradniceProstoru.put("cela", new Point2D(140,21));
+        souradniceProstoru.put("chodba",new Point2D(289,24));
+        souradniceProstoru.put("kantyna",new Point2D(290,126));
+        souradniceProstoru.put("sprchy",new Point2D(124,176));
+        souradniceProstoru.put("straznice",new Point2D(479,23));
+        souradniceProstoru.put("vezenska_zahrada",new Point2D(88,97));
+        souradniceProstoru.put("vezenska_vez",new Point2D(464,134));
+        souradniceProstoru.put("cela1", new Point2D(105,21));
+        souradniceProstoru.put("chodba1",new Point2D(250,24));
+        souradniceProstoru.put("kantyna1",new Point2D(255,115));
+        souradniceProstoru.put("sprchy1",new Point2D(100,160));
+        souradniceProstoru.put("straznice1",new Point2D(400,24));
+        souradniceProstoru.put("vezenska_zahrada1",new Point2D(80,93));
+        souradniceProstoru.put("vezenska_vez1",new Point2D(390,120));
+        souradniceProstoru.put("skrys1",new Point2D(520,23));
+        souradniceProstoru.put("unikove_okno1", new Point2D(523,128));
     }
 
     /**
@@ -134,15 +154,38 @@ public class HomeController implements Pozorovatel {
         }
 
     }
+    public void aktualizujPostavyVProstoru(){
+        postavyVProstoru = FXCollections.observableArrayList(hra.getWorld().getCurrentArea().getNpcs());
+        panelPostavVProstoru.getItems().clear();
+
+        for (Npc npc : postavyVProstoru){
+            panelPostavVProstoru.getItems().add(npc);
+        }
+
+    }
+
 
     /**
      * Metoda pro aktualizaci polohy hráče v grafickém rozhraní.
      */
     private void aktualizujPolohuHrace() {
-        String prostor = hra.getWorld().getCurrentArea().getName();
+        /***String prostor = hra.getWorld().getCurrentArea().getName();
         hrac.setLayoutX(souradniceProstoru.get(prostor).getX());
-        hrac.setLayoutY(souradniceProstoru.get(prostor).getY());
-
+        hrac.setLayoutY(souradniceProstoru.get(prostor).getY());*/
+        String prostor = hra.getWorld().getCurrentArea().getName();
+        if (hra.getWorld().getArea("vezenska_zahrada").getNpc("ricardo").getAlreadyTalked()) {
+            ImageView.setImage(new Image((getClass().getResource("herniPlanSkrys.png").toExternalForm())));
+            ImageView.setFitWidth(597.0);
+            ImageView.setFitHeight(232.0);
+            ImageView.setPickOnBounds(true);
+            //fitHeight="232.0" fitWidth="597.0"
+            hrac.setFitWidth(50);
+            hrac.setLayoutX(souradniceProstoru.get(prostor + "1").getX());
+            hrac.setLayoutY(souradniceProstoru.get(prostor + "1").getY());
+        }else {
+            hrac.setLayoutX(souradniceProstoru.get(prostor).getX());
+            hrac.setLayoutY(souradniceProstoru.get(prostor).getY());
+        }
     }
 
     /**
@@ -164,6 +207,7 @@ public class HomeController implements Pozorovatel {
         vystup.appendText("> "+ prikaz + "\n");
         String vysledek = hra.processAction(prikaz);
         vystup.appendText(vysledek + "\n\n");
+        aktualizujPolohuHrace();
 
 
 
@@ -204,7 +248,7 @@ public class HomeController implements Pozorovatel {
     private void klikPanelVychodu(MouseEvent mouseEvent) {
         Area cil = panelVychodu.getSelectionModel().getSelectedItem();
         if (cil == null) return;
-        String prikaz = "jdi " + cil.getNameTwo();
+        String prikaz = "bezim " + cil.getNameTwo();
         zpracujPrikaz(prikaz);
     }
     /**
@@ -238,7 +282,8 @@ public class HomeController implements Pozorovatel {
             vystup.clear();
             vstup.clear();
             inventar.clear();
-
+            ImageView.setImage(new Image((getClass().getResource("herniPlan.png").toExternalForm())));
+            aktualizujPolohuHrace();
             initialize();
         }
     }
@@ -260,7 +305,7 @@ public class HomeController implements Pozorovatel {
     private void klikInventar(MouseEvent mouseEvent) {
         Item cilovyItem = panelInventáře.getSelectionModel().getSelectedItem();
         if (cilovyItem == null) return;
-        String prikaz = "poloz " + cilovyItem;
+        String prikaz = "pokládám " + cilovyItem;
         zpracujPrikaz(prikaz);
     }
 
@@ -278,24 +323,42 @@ public class HomeController implements Pozorovatel {
         if (cilovyItem.getName().equals("truhla")
                 && hra.getWorld().getCurrentArea().getName().equals("vezenska_vez")
                 && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked()){
-            String prikaz = "odemkni truhla";
+            String prikaz = "odemikám truhla";
             zpracujPrikaz(prikaz);
         } else if (cilovyItem.getName().equals("truhla")
                 && hra.getWorld().getCurrentArea().getName().equals("vezenska_vez")
                 && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked() == false){
 
-            String prikaz = "prozkoumej truhla";
+            String prikaz = "prozkoumávám truhla";
             zpracujPrikaz(prikaz);
 
         }
         else if (cilovyItem.getProzkoumana() == false){
-            String prikaz = "prozkoumej " + cilovyItem;
+            String prikaz = "prozkoumávám " + cilovyItem;
             zpracujPrikaz(prikaz);
 
         }else {
-            String prikaz = "seber " + cilovyItem;
+            String prikaz = "seberu " + cilovyItem;
             zpracujPrikaz(prikaz);
             aktualizujPredmetyVProstoru();
         }
+    }
+
+    public void klikNaPostavu(MouseEvent mouseEvent) {
+        Object selectedItem = panelPostavVProstoru.getSelectionModel().getSelectedItem();
+
+        if (selectedItem == null || !(selectedItem instanceof Npc)) {
+            return;
+        }
+
+        Npc cilovaPostava = (Npc) selectedItem;
+        Npc npc = hra.getWorld().getCurrentArea().getNpc(cilovaPostava.getName());
+        if (npc.getJeProzkoumany() == false){
+            npc.setJeProzkoumany(true);
+            String prikaz = "prozkoumávám " + cilovaPostava;
+            zpracujPrikaz(prikaz);
+        }else {
+            String prikaz = "mluvím_s " + cilovaPostava;
+            zpracujPrikaz(prikaz);}
     }
 }
