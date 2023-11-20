@@ -318,16 +318,18 @@ public class HomeController implements Pozorovatel {
     @FXML
     public void klikPredmetVProstoru(MouseEvent mouseEvent) {
         Item cilovyItem = panelPredmetuVProstoru.getSelectionModel().getSelectedItem();
+        String currentArea = hra.getWorld().getCurrentArea().getName();
+        Item truhla = hra.getWorld().getArea("vezenska_vez").getItem("truhla");
         if (cilovyItem == null) return;
 
         if (cilovyItem.getName().equals("truhla")
-                && hra.getWorld().getCurrentArea().getName().equals("vezenska_vez")
-                && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked()){
+                && currentArea.equals("vezenska_vez")
+                && truhla.isLocked()){
             String prikaz = "odemikám truhla";
             zpracujPrikaz(prikaz);
         } else if (cilovyItem.getName().equals("truhla")
-                && hra.getWorld().getCurrentArea().getName().equals("vezenska_vez")
-                && hra.getWorld().getArea("vezenska_vez").getItem("truhla").isLocked() == false){
+                && currentArea.equals("vezenska_vez")
+                && truhla.isLocked() == false){
 
             String prikaz = "prozkoumávám truhla";
             zpracujPrikaz(prikaz);
@@ -346,6 +348,7 @@ public class HomeController implements Pozorovatel {
 
     public void klikNaPostavu(MouseEvent mouseEvent) {
         Object selectedItem = panelPostavVProstoru.getSelectionModel().getSelectedItem();
+        Npc escobar = hra.getWorld().getArea("cela").getNpc("escobar");
 
         if (selectedItem == null || !(selectedItem instanceof Npc)) {
             return;
@@ -357,8 +360,15 @@ public class HomeController implements Pozorovatel {
             npc.setJeProzkoumany(true);
             String prikaz = "prozkoumávám " + cilovaPostava;
             zpracujPrikaz(prikaz);
-        }else {
+        }else if (npc.getName() == escobar.getName() ){
             String prikaz = "mluvím_s " + cilovaPostava;
-            zpracujPrikaz(prikaz);}
+            zpracujPrikaz(prikaz);
+            panelPostavVProstoru.getItems().clear();
+        }
+
+        else {
+            String prikaz = "mluvím_s " + cilovaPostava;
+            zpracujPrikaz(prikaz);
+        }
     }
 }
